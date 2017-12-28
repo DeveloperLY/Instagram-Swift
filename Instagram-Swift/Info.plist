@@ -41,5 +41,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Instagram 需要使用设备的媒体库</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Instagram 需要使用设备的照片库</string>
 </dict>
 </plist>

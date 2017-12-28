@@ -10,13 +10,17 @@
 		0833A03C4045271CDF39329B /* Pods_Instagram_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8538BA2ED59A5D359C4F11D2 /* Pods_Instagram_SwiftTests.framework */; };
 		0D3BFC49CA47452C6712AC2E /* Pods_Instagram_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50BB54F3664C88FD256ABA8C /* Pods_Instagram_SwiftUITests.framework */; };
 		86D88FE3A240B8C5953399E2 /* Pods_Instagram_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80BE5C916695481961C4B62D /* Pods_Instagram_Swift.framework */; };
+		CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05621FF51BD100C1420C /* ConstConfig.swift */; };
+		CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05691FF5333100C1420C /* LYLoginViewController.swift */; };
+		CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */; };
+		CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B056D1FF5336100C1420C /* LYResetPasswordViewController.swift */; };
 		CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD540F391FF5089D009D0362 /* AppDelegate.swift */; };
-		CD540F3C1FF5089D009D0362 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD540F3B1FF5089D009D0362 /* ViewController.swift */; };
 		CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD540F3D1FF5089D009D0362 /* Main.storyboard */; };
 		CD540F411FF5089D009D0362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD540F401FF5089D009D0362 /* Assets.xcassets */; };
 		CD540F441FF5089D009D0362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD540F421FF5089D009D0362 /* LaunchScreen.storyboard */; };
 		CD540F4F1FF5089E009D0362 /* Instagram_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD540F4E1FF5089E009D0362 /* Instagram_SwiftTests.swift */; };
 		CD540F5A1FF5089E009D0362 /* Instagram_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD540F591FF5089E009D0362 /* Instagram_SwiftUITests.swift */; };
+		CD7C0A411FF53DBD00540F73 /* pp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD7C0A401FF53DBD00540F73 /* pp.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +48,12 @@
 		5ED0C829BE3F45A6C9BD7A01 /* Pods-Instagram-SwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		80BE5C916695481961C4B62D /* Pods_Instagram_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8538BA2ED59A5D359C4F11D2 /* Pods_Instagram_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1B05621FF51BD100C1420C /* ConstConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstConfig.swift; sourceTree = "<group>"; };
+		CD1B05691FF5333100C1420C /* LYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYLoginViewController.swift; sourceTree = "<group>"; };
+		CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYRegisterViewController.swift; sourceTree = "<group>"; };
+		CD1B056D1FF5336100C1420C /* LYResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYResetPasswordViewController.swift; sourceTree = "<group>"; };
 		CD540F361FF5089D009D0362 /* Instagram-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD540F391FF5089D009D0362 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD540F3B1FF5089D009D0362 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD540F3E1FF5089D009D0362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD540F401FF5089D009D0362 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD540F431FF5089D009D0362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +64,7 @@
 		CD540F551FF5089E009D0362 /* Instagram-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Instagram-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD540F591FF5089E009D0362 /* Instagram_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instagram_SwiftUITests.swift; sourceTree = "<group>"; };
 		CD540F5B1FF5089E009D0362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD7C0A401FF53DBD00540F73 /* pp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp.jpg; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +110,61 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD1B05611FF51B9300C1420C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CD1B05621FF51BD100C1420C /* ConstConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		CD1B05641FF531DE00C1420C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CD1B05681FF532A500C1420C /* Login&Register */,
+				CD1B05661FF5321300C1420C /* AppDelegate */,
+				CD1B05651FF5320400C1420C /* Main */,
+				CD1B05611FF51B9300C1420C /* Config */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CD1B05651FF5320400C1420C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CD540F3D1FF5089D009D0362 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CD1B05661FF5321300C1420C /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				CD540F391FF5089D009D0362 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		CD1B05671FF5323300C1420C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CD7C0A3F1FF53DAE00540F73 /* Images */,
+				CD540F421FF5089D009D0362 /* LaunchScreen.storyboard */,
+				CD540F401FF5089D009D0362 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CD1B05681FF532A500C1420C /* Login&Register */ = {
+			isa = PBXGroup;
+			children = (
+				CD1B05691FF5333100C1420C /* LYLoginViewController.swift */,
+				CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */,
+				CD1B056D1FF5336100C1420C /* LYResetPasswordViewController.swift */,
+			);
+			path = "Login&Register";
+			sourceTree = "<group>";
+		};
 		CD540F2D1FF5089D009D0362 = {
 			isa = PBXGroup;
 			children = (
@@ -127,11 +190,8 @@
 		CD540F381FF5089D009D0362 /* Instagram-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				CD540F391FF5089D009D0362 /* AppDelegate.swift */,
-				CD540F3B1FF5089D009D0362 /* ViewController.swift */,
-				CD540F3D1FF5089D009D0362 /* Main.storyboard */,
-				CD540F401FF5089D009D0362 /* Assets.xcassets */,
-				CD540F421FF5089D009D0362 /* LaunchScreen.storyboard */,
+				CD1B05671FF5323300C1420C /* Resources */,
+				CD1B05641FF531DE00C1420C /* Classes */,
 				CD540F451FF5089D009D0362 /* Info.plist */,
 			);
 			path = "Instagram-Swift";
@@ -153,6 +213,14 @@
 				CD540F5B1FF5089E009D0362 /* Info.plist */,
 			);
 			path = "Instagram-SwiftUITests";
+			sourceTree = "<group>";
+		};
+		CD7C0A3F1FF53DAE00540F73 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				CD7C0A401FF53DBD00540F73 /* pp.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		EE778B2526E217BAA93FC0B7 /* Frameworks */ = {
@@ -236,6 +304,7 @@
 		CD540F2E1FF5089D009D0362 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LY;
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = DeveloperLY;
@@ -282,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD540F441FF5089D009D0362 /* LaunchScreen.storyboard in Resources */,
+				CD7C0A411FF53DBD00540F73 /* pp.jpg in Resources */,
 				CD540F411FF5089D009D0362 /* Assets.xcassets in Resources */,
 				CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */,
 			);
@@ -343,9 +413,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram-Swift/Pods-Instagram-Swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/LeanCloud/LeanCloud.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LeanCloud.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -455,8 +530,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD540F3C1FF5089D009D0362 /* ViewController.swift in Sources */,
+				CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */,
 				CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */,
+				CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */,
+				CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */,
+				CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

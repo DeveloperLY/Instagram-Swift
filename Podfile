@@ -7,6 +7,7 @@ target 'Instagram-Swift' do
   use_frameworks!
 
   # Pods for Instagram-Swift
+  pod 'LeanCloud', '~> 11.0.0'
 
   target 'Instagram-SwiftTests' do
     inherit! :search_paths

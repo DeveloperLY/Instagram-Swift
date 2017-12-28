@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LeanCloud
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // LeanCloud
+        LeanCloud.initialize(applicationID: kLeanCloudAppID, applicationKey: kLeanCloudAppKey)
+        
+        login()
+        
         return true
     }
 
@@ -41,6 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func login() -> Void {
+        // 获取本地存储的用户信息
+        let username: String? = UserDefaults.standard.string(forKey: "username")
+        
+        if username != nil {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
+            window?.rootViewController = tabBarController
+        }
+        
+    }
 
 }
 
