@@ -16,7 +16,9 @@ class LYResetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        // 添加手势
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardTap(_:)))
+        self.view.addGestureRecognizer(hideTap)
     }
     
     // MARK: - Event/Touch
@@ -46,6 +48,11 @@ class LYResetPasswordViewController: UIViewController {
     }
     
     @IBAction func cancelButtonDidClick(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func hideKeyboardTap(_ recognizer: UITapGestureRecognizer) -> Void {
+        self.view.endEditing(true)
     }
 }

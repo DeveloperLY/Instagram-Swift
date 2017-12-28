@@ -35,6 +35,10 @@ class LYRegisterViewController: UIViewController {
     // 设置滚动视图的高度
     var scrollViewHeight: CGFloat = 0.0
     
+    
+    @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
+    
+    
     // 获取虚拟键盘的大小
     var keyboardRect: CGRect = CGRect()
     
@@ -52,7 +56,6 @@ class LYRegisterViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setUpUI() -> Void {
-        scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         // 设置 contentSize
         scrollView.contentSize.height = self.view.frame.height
         scrollViewHeight = self.view.frame.height
@@ -75,7 +78,7 @@ class LYRegisterViewController: UIViewController {
     }
     
     
-    private func SelectImage() -> Void {
+    private func selectImage() -> Void {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
@@ -141,6 +144,7 @@ class LYRegisterViewController: UIViewController {
     }
     
     @IBAction func cancelButtonDidClick(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -151,13 +155,14 @@ class LYRegisterViewController: UIViewController {
         
         // 修改滚动视图高度
         UIView.animate(withDuration: 0.4) {
-            self.scrollView.frame.size.height = self.scrollViewHeight - self.keyboardRect.size.height
+            self.scrollBottomConstraint.constant -= self.keyboardRect.size.height
+            self.scrollView.contentSize.height = self.view.frame.height
         }
     }
     
     @objc func hideKeyboard(_ notification: Notification) -> Void {
         UIView.animate(withDuration: 0.4) {
-            self.scrollView.frame.size.height = self.view.frame.height
+            self.scrollBottomConstraint.constant = 0
         }
     }
     
@@ -166,7 +171,7 @@ class LYRegisterViewController: UIViewController {
     }
     
     @objc func avatarImageTap(_ recognizer: UITapGestureRecognizer) -> Void {
-        SelectImage()
+        selectImage()
     }
     
 
