@@ -7,29 +7,45 @@
 //
 
 import UIKit
+import LeanCloud
 
 class LYResetPasswordViewController: UIViewController {
-
+    
+    @IBOutlet weak var emailTestField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Event/Touch
+    @IBAction func resetButtonDidClick(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        if emailTestField.text!.isEmpty {
+            // 弹出对话框提示用户
+            let alert = UIAlertController(title: "请注意", message: "电子邮箱不能为空", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        LCUser.requestPasswordReset(email: emailTestField.text!) { (result) in
+            if result.isSuccess {
+                let alert = UIAlertController(title: "请注意", message: "重置密码链接已经发送到您的电子邮箱！", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                print(result.error?.localizedDescription ?? "重置密码链接发送失败！")
+            }
+        }
     }
-    */
-
+    
+    @IBAction func cancelButtonDidClick(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
