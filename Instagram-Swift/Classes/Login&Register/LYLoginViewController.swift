@@ -11,13 +11,18 @@ import LeanCloud
 
 class LYLoginViewController: UIViewController {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTestField: UITextField!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // nameLabel 字体
+        nameLabel.font = UIFont(name: "Pacifico", size: 25.0)
 
         // 添加手势
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardTap(_:)))
