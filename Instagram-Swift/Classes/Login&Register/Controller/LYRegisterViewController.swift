@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 
 class LYRegisterViewController: UIViewController {
     
@@ -113,34 +113,36 @@ class LYRegisterViewController: UIViewController {
         }
         
         // 将用户输入的信息提交到服务器
-        let user = LCUser()
-        user.username = LCString((usernameTextField.text)!)
-        user.email = LCString((emailTextField.text?.lowercased())!)
-        user.password = LCString(passwordTextField.text!)
-        user["fullname"] = LCString(fullnameTextField.text!)
-        user["bio"] = LCString(bioTextField.text!)
-        user["web"] = LCString(webTextField.text!)
-        user["gender"] = LCString("")
+        let user = AVUser()
+        user.username = usernameTextField.text
+        user.email = emailTextField.text
+        user.password = passwordTextField.text
+        user["fullname"] = fullnameTextField.text
+        user["bio"] = bioTextField.text
+        user["web"] = webTextField.text
+        user["gender"] = ""
         
         // 转换头像数据并发送到服务器
         let avatarData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
-        user["avatar"] = LCData(avatarData!)
+        let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
+        user["avatar"] = avatarFile
         
-        user.signUp { (result) in
-            if result.isSuccess {
+        // 提交数据
+        user.signUpInBackground { (isSuccess, error) in
+            if isSuccess {
                 print("用户注册成功！")
                 
                 // 记住登录的用户
-                UserDefaults.standard.set(user.username?.jsonString, forKey: "username")
+                UserDefaults.standard.set(user.username, forKey: "username")
                 UserDefaults.standard.synchronize()
                 
                 let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.login()
-                
             } else {
-                print(result.error?.localizedDescription ?? "用户注册失败！")
+                print(error?.localizedDescription ?? "用户注册失败！")
             }
         }
+    
     }
     
     @IBAction func cancelButtonDidClick(_ sender: UIButton) {

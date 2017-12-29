@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 
 class LYResetPasswordViewController: UIViewController {
     
@@ -35,14 +35,14 @@ class LYResetPasswordViewController: UIViewController {
             return
         }
         
-        LCUser.requestPasswordReset(email: emailTestField.text!) { (result) in
-            if result.isSuccess {
+        AVUser.requestPasswordResetForEmail(inBackground: emailTestField.text!) { (isSuccess, error) in
+            if isSuccess {
                 let alert = UIAlertController(title: "请注意", message: "重置密码链接已经发送到您的电子邮箱！", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "好的", style: .cancel, handler: nil)
                 alert.addAction(ok)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                print(result.error?.localizedDescription ?? "重置密码链接发送失败！")
+                print(error?.localizedDescription ?? "重置密码链接发送失败！")
             }
         }
     }

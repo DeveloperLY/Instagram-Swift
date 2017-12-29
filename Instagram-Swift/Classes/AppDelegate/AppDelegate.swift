@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
+import AVOSCloudCrashReporting
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // LeanCloud
-        LeanCloud.initialize(applicationID: kLeanCloudAppID, applicationKey: kLeanCloudAppKey)
+        AVOSCloud.setApplicationId(kLeanCloudAppID, clientKey: kLeanCloudAppKey)
+        
+        // 跟踪统计
+        AVAnalytics.trackAppOpened(launchOptions: launchOptions)
         
         login()
         

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 
 class LYLoginViewController: UIViewController {
     
@@ -44,18 +44,19 @@ class LYLoginViewController: UIViewController {
         }
         
         // 用户登录
-        LCUser.logIn(username: usernameTextField.text!, password: passwordTestField.text!) { (result) in
-            if result.error == nil {
+        AVUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTestField.text!) { (user, error) in
+            if error == nil {
                 // 登录成功
-                UserDefaults.standard.set(result.object?.username?.jsonString, forKey: "username")
+                UserDefaults.standard.set(user!.username, forKey: "username")
                 UserDefaults.standard.synchronize()
                 
                 let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.login()
             } else {
-                print(result.error?.localizedDescription ?? "用户登录失败！")
+                print(error?.localizedDescription ?? "用户登录失败！")
             }
         }
+        
     }
     
     @objc func hideKeyboardTap(_ recognizer: UITapGestureRecognizer) -> Void {
