@@ -131,13 +131,18 @@ class LYRegisterViewController: UIViewController {
         user.signUpInBackground { (isSuccess, error) in
             if isSuccess {
                 print("用户注册成功！")
+            
+                AVUser.logInWithUsername(inBackground: user.username!, password: user.password!, block: { (user: AVUser?, error: Error?) in
+                    if let user = user {
+                        // 记住登录的用户
+                        UserDefaults.standard.set(user.username, forKey: "username")
+                        UserDefaults.standard.synchronize()
+                        
+                        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.login()
+                    }
+                })
                 
-                // 记住登录的用户
-                UserDefaults.standard.set(user.username, forKey: "username")
-                UserDefaults.standard.synchronize()
-                
-                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.login()
             } else {
                 print(error?.localizedDescription ?? "用户注册失败！")
             }

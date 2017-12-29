@@ -113,7 +113,11 @@ class LYHomeViewController: UICollectionViewController {
         
         let avatarQuery = AVUser.current()?.object(forKey: "avatar") as! AVFile
         avatarQuery.getDataInBackground { (data: Data?, error: Error?) in
-            headerView.avatarImageView.image = UIImage(data: data!)
+            if data == nil {
+                print(error?.localizedDescription ?? "头像信息获取失败")
+            } else {
+                headerView.avatarImageView.image = UIImage(data: data!)
+            }
         }
     
         return headerView
