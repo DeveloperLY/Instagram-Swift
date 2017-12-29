@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-799.20000000000005" y="-232.53373313343329"/>
+            <point key="canvasLocation" x="-1902" y="-377"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="vRr-9i-Os5">
@@ -293,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qb-DV-z0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7.2000000000000002" y="115.59220389805098"/>
+            <point key="canvasLocation" x="-1110" y="-29"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="r7m-ib-UPU">
@@ -310,7 +310,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXe-ni-csP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-799" y="892"/>
+            <point key="canvasLocation" x="-3652" y="785"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="egN-bL-Iyl">
@@ -427,6 +427,9 @@
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <segue destination="v84-B9-qnL" kind="presentation" id="Kb8-eq-UKg"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户简介" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwJ-Tz-cI6">
                                     <rect key="frame" x="28" y="173" width="327" height="57"/>
@@ -494,7 +497,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSe-9g-KYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="656.79999999999995" y="891.90404797601207"/>
+            <point key="canvasLocation" x="-2196" y="785"/>
         </scene>
         <!--Followers Controller-->
         <scene sceneID="sjt-nT-JQQ">
@@ -566,7 +569,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNB-9B-2FA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389.5999999999999" y="891.90404797601207"/>
+            <point key="canvasLocation" x="-1463" y="785"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="tkK-JK-mLD">
@@ -640,7 +643,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1j-oE-I6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="-535"/>
+            <point key="canvasLocation" x="-1110" y="-681"/>
         </scene>
         <!--Item-->
         <scene sceneID="2TV-8q-SVw">
@@ -659,7 +662,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZh-Cu-Oan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-68" y="892"/>
+            <point key="canvasLocation" x="-2921" y="785"/>
         </scene>
         <!--Guest View Controller-->
         <scene sceneID="FOM-sC-6BG">
@@ -846,7 +849,126 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVJ-nB-aST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2142" y="892"/>
+            <point key="canvasLocation" x="-729" y="785"/>
+        </scene>
+        <!--Edit Info View Controller-->
+        <scene sceneID="Zzx-6M-vOi">
+            <objects>
+                <viewController storyboardIdentifier="EditInfoViewController" id="EcO-lw-3hi" customClass="LYEditInfoViewController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q5O-vR-cIv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdZ-Cu-VmT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pp.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9zg-e3-co7">
+                                        <rect key="frame" x="275" y="16" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ng3-XD-Ggr">
+                                        <rect key="frame" x="19" y="15" width="248" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="用户名" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="hXl-D3-puw">
+                                        <rect key="frame" x="19" y="60" width="248" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="网站" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="tJ3-xR-sEv">
+                                        <rect key="frame" x="19" y="105" width="336" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O5a-0p-Ruv">
+                                        <rect key="frame" x="19" y="143" width="336" height="76"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="私人信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tJ-hS-0nc">
+                                        <rect key="frame" x="19" y="256" width="336" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="电子邮件" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1bj-ib-1MC">
+                                        <rect key="frame" x="19" y="296" width="336" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="移动电话" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ASQ-EY-KMY">
+                                        <rect key="frame" x="19" y="334" width="336" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="性别" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="50f-y0-WQY">
+                                        <rect key="frame" x="19" y="372" width="336" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="RAc-mI-bNC"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="K02-jo-sJr">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="R6f-GM-hAV">
+                            <connections>
+                                <action selector="cancelDidClick:" destination="EcO-lw-3hi" id="a3W-F4-Srw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="N7w-oR-o9P">
+                            <connections>
+                                <action selector="saveButtonDidClick:" destination="EcO-lw-3hi" id="NhP-fK-gVe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="avatarImageView" destination="9zg-e3-co7" id="Y4U-vo-zMN"/>
+                        <outlet property="bioTextView" destination="O5a-0p-Ruv" id="3sr-UA-Ia0"/>
+                        <outlet property="emailTextField" destination="1bj-ib-1MC" id="q9t-Sh-ueY"/>
+                        <outlet property="fullnameTextField" destination="ng3-XD-Ggr" id="SYc-8I-CPW"/>
+                        <outlet property="genderTextField" destination="50f-y0-WQY" id="24A-iH-YBk"/>
+                        <outlet property="mobileTextField" destination="ASQ-EY-KMY" id="VdJ-5p-dmK"/>
+                        <outlet property="scrollView" destination="qdZ-Cu-VmT" id="M2B-yu-3VQ"/>
+                        <outlet property="titleLabel" destination="7tJ-hS-0nc" id="qal-GT-GXO"/>
+                        <outlet property="usernameTextField" destination="hXl-D3-puw" id="G8E-kh-iDO"/>
+                        <outlet property="webTextField" destination="tJ3-xR-sEv" id="h7a-zk-utX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgg-Jx-aNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="918" y="785"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2Kp-D0-i7d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v84-B9-qnL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jHa-rN-wCo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EcO-lw-3hi" kind="relationship" relationship="rootViewController" id="EJr-ZG-rAF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pie-IG-I87" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="150" y="785"/>
         </scene>
     </scenes>
     <resources>

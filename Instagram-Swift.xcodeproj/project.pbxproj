@@ -29,6 +29,7 @@
 		CD835B2C1FF6478600BA0DA5 /* LYFollowersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */; };
 		CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */; };
 		CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */; };
+		CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersController.swift; sourceTree = "<group>"; };
 		CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersCell.swift; sourceTree = "<group>"; };
 		CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYGuestViewController.swift; sourceTree = "<group>"; };
+		CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYEditInfoViewController.swift; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				CD835B1A1FF60F5000BA0DA5 /* LYHomeViewController.swift */,
+				CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				CD835B1B1FF60F5000BA0DA5 /* LYHomeViewController.swift in Sources */,
 				CD835B1E1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift in Sources */,
 				CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */,
+				CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
