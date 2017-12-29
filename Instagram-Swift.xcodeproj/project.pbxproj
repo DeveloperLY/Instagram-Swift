@@ -26,6 +26,9 @@
 		CD835B1B1FF60F5000BA0DA5 /* LYHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B1A1FF60F5000BA0DA5 /* LYHomeViewController.swift */; };
 		CD835B1E1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B1D1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift */; };
 		CD835B201FF6124C00BA0DA5 /* LYHomePictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B1F1FF6124C00BA0DA5 /* LYHomePictureCell.swift */; };
+		CD835B2C1FF6478600BA0DA5 /* LYFollowersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */; };
+		CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */; };
+		CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		CD835B1D1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHomeHeaderView.swift; sourceTree = "<group>"; };
 		CD835B1F1FF6124C00BA0DA5 /* LYHomePictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHomePictureCell.swift; sourceTree = "<group>"; };
 		CD835B251FF626C200BA0DA5 /* Instagram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instagram-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersController.swift; sourceTree = "<group>"; };
+		CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersCell.swift; sourceTree = "<group>"; };
+		CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYGuestViewController.swift; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,8 @@
 		CD1B05641FF531DE00C1420C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD835B301FF65DBB00BA0DA5 /* Guest */,
+				CD835B261FF6473100BA0DA5 /* Follower */,
 				CD835B171FF60F0700BA0DA5 /* Home */,
 				CD1B05681FF532A500C1420C /* Login&Register */,
 				CD1B05661FF5321300C1420C /* AppDelegate */,
@@ -278,6 +286,47 @@
 				CD835B1F1FF6124C00BA0DA5 /* LYHomePictureCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CD835B261FF6473100BA0DA5 /* Follower */ = {
+			isa = PBXGroup;
+			children = (
+				CD835B2D1FF6478C00BA0DA5 /* View */,
+				CD835B271FF6474700BA0DA5 /* Controller */,
+			);
+			path = Follower;
+			sourceTree = "<group>";
+		};
+		CD835B271FF6474700BA0DA5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CD835B2D1FF6478C00BA0DA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD835B301FF65DBB00BA0DA5 /* Guest */ = {
+			isa = PBXGroup;
+			children = (
+				CD835B311FF65DC500BA0DA5 /* Controller */,
+			);
+			path = Guest;
+			sourceTree = "<group>";
+		};
+		CD835B311FF65DC500BA0DA5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		EE778B2526E217BAA93FC0B7 /* Frameworks */ = {
@@ -592,10 +641,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */,
+				CD835B2C1FF6478600BA0DA5 /* LYFollowersController.swift in Sources */,
 				CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */,
 				CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */,
 				CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */,
 				CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */,
+				CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */,
 				CD835B201FF6124C00BA0DA5 /* LYHomePictureCell.swift in Sources */,
 				CD835B1B1FF60F5000BA0DA5 /* LYHomeViewController.swift in Sources */,
 				CD835B1E1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift in Sources */,

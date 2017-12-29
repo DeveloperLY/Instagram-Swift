@@ -22,14 +22,12 @@ class LYHomeViewController: UICollectionViewController {
     var puuidArray = [String]()
     var pictureArray = [AVFile]()
     
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // 设置集合视图在垂直方向上反弹的效果
+        self.collectionView?.alwaysBounceVertical = true
         
         title = AVUser.current()?.username
         
@@ -80,15 +78,45 @@ class LYHomeViewController: UICollectionViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    // MARK: - Event
+    // 单击帖子数后调用的方法
+    @objc func postsTap(_ recognizer: UITapGestureRecognizer) -> Void {
+        if !pictureArray.isEmpty {
+            let indexPath = IndexPath(item: 0, section: 0)
+            self.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
-    */
+    
+    // 单击关注者数后调用的方法
+    @objc func followersTap(_ recognizer: UITapGestureRecognizer) -> Void {
+        let followersViewController = self.storyboard?.instantiateViewController(withIdentifier: "FollowersController") as! LYFollowersController
+        followersViewController.user = (AVUser.current()?.username)!
+        followersViewController.show = "关 注 者"
+        self.navigationController?.pushViewController(followersViewController, animated: true)
+    }
+    
+    // 单击关注数后调用的方法
+    @objc func followingsTap(_ recognizer: UITapGestureRecognizer) -> Void {
+        let followersViewController = self.storyboard?.instantiateViewController(withIdentifier: "FollowersController") as! LYFollowersController
+        followersViewController.user = (AVUser.current()?.username)!
+        followersViewController.show = "关 注"
+        self.navigationController?.pushViewController(followersViewController, animated: true)
+    }
+    
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        // 退出用户登录
+        AVUser.logOut()
+        
+        // 移除本地登录信息
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.synchronize()
+        
+        // 进入登录控制器
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LYLoginViewController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = loginViewController
+    }
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -100,7 +128,7 @@ class LYHomeViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return pictureArray.count
+        return pictureArray.count * 20
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -146,7 +174,15 @@ class LYHomeViewController: UICollectionViewController {
             }
         }
         
-    
+        let postsTap = UITapGestureRecognizer(target: self, action: #selector(postsTap(_:)))
+        headerView.posts.addGestureRecognizer(postsTap)
+        
+        let followersTap = UITapGestureRecognizer(target: self, action: #selector(followersTap(_:)))
+        headerView.followers.addGestureRecognizer(followersTap)
+        
+        let followingsTap = UITapGestureRecognizer(target: self, action: #selector(followingsTap(_:)))
+        headerView.followings.addGestureRecognizer(followingsTap)
+        
         return headerView
     }
 
@@ -155,7 +191,7 @@ class LYHomeViewController: UICollectionViewController {
     
         // Configure the cell
         // 从pictureArray 中获取图片
-        pictureArray[indexPath.item].getDataInBackground { (data: Data?, error: Error?) in
+        pictureArray[0].getDataInBackground { (data: Data?, error: Error?) in
             if error == nil {
                 cell.pictureImageView.image = UIImage(data: data!)
             } else {
@@ -165,36 +201,11 @@ class LYHomeViewController: UICollectionViewController {
         
         return cell
     }
-    
-    // MARK: UICollectionViewDelegate
+}
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
+// MARK: - UICollectionViewDelegateFlowLayout
+extension LYHomeViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: self.view.frame.width / 3, height: self.view.frame.width / 3)
+//    }
 }

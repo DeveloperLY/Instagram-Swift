@@ -1,5 +1,5 @@
 //
-//  LYHomeHeaderView.swift
+//  LYFollowersCell.swift
 //  Instagram-Swift
 //
 //  Created by LiuY on 2017/12/29.
@@ -9,36 +9,34 @@
 import UIKit
 import AVOSCloud
 
-class LYHomeHeaderView: UICollectionReusableView {
+class LYFollowersCell: UITableViewCell {
     
-    // 用户头像
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    @IBOutlet weak var fullnameLabel: UILabel!
-    
-    @IBOutlet weak var webTextView: UITextView!
-    
-    @IBOutlet weak var bioLabel: UILabel!
-    
-    
-    
-    @IBOutlet weak var posts: UILabel!
-    
-    @IBOutlet weak var followers: UILabel!
-    
-    @IBOutlet weak var followings: UILabel!
-    
-    @IBOutlet weak var editHomeButton: UIButton!
-    
+    @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var followButton: UIButton!
     
+    var user: AVUser!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+        // 设置头像圆形
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width * 0.5
+        avatarImageView.clipsToBounds = true
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
     
     @IBAction func followButtonDidTouch(_ sender: UIButton) {
         let title = followButton.title(for: .normal)
-        
-        // 当前访客对象
-        let user = guestArray.last
         
         if title == "关 注" {
             guard user != nil else {
@@ -67,14 +65,8 @@ class LYHomeHeaderView: UICollectionReusableView {
                 }
             })
         }
+        
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        // 设置头像圆形
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width * 0.5
-        avatarImageView.clipsToBounds = true
-    }
 
 }
