@@ -39,6 +39,9 @@ class LYHomeViewController: UICollectionViewController {
         
         // 加载数据
         loadPosts()
+        
+        // 监听数据刷新
+        NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,6 +104,10 @@ class LYHomeViewController: UICollectionViewController {
         followersViewController.user = (AVUser.current()?.username)!
         followersViewController.show = "关 注"
         self.navigationController?.pushViewController(followersViewController, animated: true)
+    }
+    
+    @objc func reload(_ notification: Notification) -> Void {
+        collectionView?.reloadData()
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {

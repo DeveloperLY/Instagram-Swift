@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVOSCloud
 
 class LYEditInfoViewController: UIViewController {
     
@@ -36,7 +37,11 @@ class LYEditInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 布局
         alignment()
+        
+        // 加载信息
+        information()
         
         setUpNotification()
         
@@ -54,7 +59,7 @@ class LYEditInfoViewController: UIViewController {
     }
     
     // 界面布局
-    func alignment() -> Void {
+    private func alignment() -> Void {
         let width = self.view.frame.width
         let height = self.view.frame.height
         
@@ -88,6 +93,27 @@ class LYEditInfoViewController: UIViewController {
         
     }
     
+    // 获取用户信息
+    private func information() -> Void {
+        let avatar = AVUser.current()?.object(forKey: "avatar") as! AVFile
+        avatar.getDataInBackground { (data: Data?, error: Error?) in
+            if data == nil {
+                print(error?.localizedDescription ?? "头像信息获取失败")
+            } else {
+                self.avatarImageView.image = UIImage(data: data!)
+            }
+        }
+        
+        usernameTextField.text = AVUser.current()?.username
+        fullnameTextField.text = AVUser.current()?.object(forKey: "fullname") as? String
+        webTextField.text = AVUser.current()?.object(forKey: "web") as? String
+        bioTextView.text = AVUser.current()?.object(forKey: "bio") as? String
+        
+        emailTextField.text = AVUser.current()?.email
+        mobileTextField.text = AVUser.current()?.mobilePhoneNumber
+        genderTextField.text = AVUser.current()?.object(forKey: "gender") as? String
+    }
+    
     private func setUpNotification() -> Void {
         // 监听键盘弹出和消失
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -95,8 +121,83 @@ class LYEditInfoViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
+    // 校验Email的合法性
+    private func validateEmail(email: String) -> Bool {
+        let regex = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}"
+        let range = email.range(of: regex, options: .regularExpression)
+        let result = range != nil ? true : false
+        return result
+    }
+    
+    // 校验Web的合法性
+    private func validateWeb(web: String) -> Bool {
+        let regex = "www\\.[A-Za-z0-9._%+-]+\\.[A-Za-z]{2,14}"
+        let range = web.range(of: regex, options: .regularExpression)
+        let result = range != nil ? true : false
+        return result
+    }
+    // 校验手机号的合法性
+    private func validateMobilePhoneNumber(mobilePhoneNumber: String) -> Bool {
+        let regex = "0?(13|14|15|18)[0-9]{9}"
+        let range = mobilePhoneNumber.range(of: regex, options: .regularExpression)
+        let result = range != nil ? true : false
+        return result
+    }
+    
+    // 消息警告
+    func alert(error: String, message: String) {
+        let alert = UIAlertController(title: error, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Event/Touch
     @IBAction func saveButtonDidClick(_ sender: UIBarButtonItem) {
+        if !validateWeb(web: webTextField.text!) {
+            alert(error: "错误的网页链接", message: "请输入正确的网址")
+            return
+        }
         
+        if !validateEmail(email: emailTextField.text!) {
+            alert(error: "错误的Email地址", message: "请输入正确的电子邮件地址")
+            return
+        }
+        
+        if !validateMobilePhoneNumber(mobilePhoneNumber: mobileTextField.text!) {
+            alert(error: "错误的手机号码", message: "请输入正确的手机号码")
+            return
+        }
+        
+        // 保存Field信息到服务器中
+        let user = AVUser.current()
+        user?.username = usernameTextField.text
+        user?.email = emailTextField.text?.lowercased()
+        user?["fullname"] = fullnameTextField.text
+        user?["web"] = webTextField.text?.lowercased()
+        user?["bio"] = bioTextView.text
+        
+        user?.mobilePhoneNumber = (mobileTextField.text?.isEmpty)! ? "" : mobileTextField.text!
+        
+        user?["gender"] = (genderTextField.text?.isEmpty)! ? "" : genderTextField.text!
+        
+        let avatarData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
+        let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
+        user?["avatar"] = avatarFile
+        
+        user?.saveInBackground({ (isSuccess: Bool, error: Error?) in
+            if isSuccess {
+                // 隐藏键盘
+                self.view.endEditing(true)
+                
+                // 退出
+                self.dismiss(animated: true, completion: nil)
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
+            } else {
+                print(error?.localizedDescription ?? "修改用户信息失败")
+            }
+        })
     }
     
     @IBAction func cancelDidClick(_ sender: UIBarButtonItem) {
@@ -128,6 +229,10 @@ class LYEditInfoViewController: UIViewController {
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
