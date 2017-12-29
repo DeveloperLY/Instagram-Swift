@@ -119,6 +119,33 @@ class LYHomeViewController: UICollectionViewController {
                 headerView.avatarImageView.image = UIImage(data: data!)
             }
         }
+        
+        let currentUser: AVUser = AVUser.current()!
+        
+        let postsQuery = AVQuery(className: "Posts")
+        postsQuery.whereKey("username", equalTo: currentUser.username ?? "")
+        postsQuery.countObjectsInBackground { (count: Int, error: Error?) in
+            if error == nil {
+                headerView.posts.text = String(count)
+            }
+        }
+        
+        let followersQuery = AVQuery(className: "_Follower")
+        followersQuery.whereKey("user", equalTo: currentUser)
+        followersQuery.countObjectsInBackground { (count: Int, error: Error?) in
+            if error == nil {
+                headerView.followers.text = String(count)
+            }
+        }
+        
+        let followeesQuery = AVQuery(className: "_Followee")
+        followeesQuery.whereKey("user", equalTo: currentUser)
+        followeesQuery.countObjectsInBackground { (count: Int, error: Error?) in
+            if error == nil {
+                headerView.followings.text = String(count)
+            }
+        }
+        
     
         return headerView
     }
