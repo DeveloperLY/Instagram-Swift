@@ -95,6 +95,34 @@ class LYGuestViewController: UICollectionViewController {
         }
     }
     
+    func loadMore() -> Void {
+        if onePage <= pictureArray.count {
+            onePage += 12
+            
+            let query = AVQuery(className: "Posts")
+            query.whereKey("username", equalTo: guestArray.last?.username ?? "")
+            query.limit = onePage
+            query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                // 查询成功
+                if error == nil {
+                    // 清空两个数组
+                    self.puuidArray.removeAll(keepingCapacity: false)
+                    self.pictureArray.removeAll(keepingCapacity: false)
+                    
+                    for object in objects! {
+                        // 将查询到的数据添加到数组中
+                        self.puuidArray.append((object as AnyObject).value(forKey: "puuid") as! String)
+                        self.pictureArray.append((object as AnyObject).value(forKey: "picture") as! AVFile)
+                    }
+                    print("loaded + \(self.onePage)")
+                    self.collectionView?.reloadData()
+                } else {
+                    print(error?.localizedDescription ?? "加载更多帖子失败")
+                }
+            })
+        }
+    }
+    
     // MARK: - Event
     // 单击帖子数后调用的方法
     @objc func postsTap(_ recognizer: UITapGestureRecognizer) -> Void {
@@ -239,6 +267,12 @@ class LYGuestViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - self.view.frame.height {
+            self.loadMore()
+        }
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
