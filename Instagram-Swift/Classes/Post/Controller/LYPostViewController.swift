@@ -34,8 +34,8 @@ class LYPostViewController: UITableViewController {
         self.view.addGestureRecognizer(backSeipe)
         
         // 动态Cell高度设置
-//        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 550.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 550.0
         
         loadData()
     }
