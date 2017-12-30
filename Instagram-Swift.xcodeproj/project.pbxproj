@@ -35,6 +35,12 @@
 		CDC57CFB1FF76FF800375426 /* LYConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57CFA1FF76FF800375426 /* LYConst.swift */; };
 		CDC57CFF1FF80E9A00375426 /* LYPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57CFE1FF80E9A00375426 /* LYPostViewController.swift */; };
 		CDC57D021FF80EC700375426 /* LYPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D011FF80EC700375426 /* LYPostCell.swift */; };
+		CDC57D041FF820C300375426 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC57D031FF820C300375426 /* like.png */; };
+		CDC57D061FF820D000375426 /* unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC57D051FF820D000375426 /* unlike.png */; };
+		CDC57D081FF820DC00375426 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC57D071FF820DC00375426 /* comment.png */; };
+		CDC57D0A1FF820E600375426 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC57D091FF820E600375426 /* more.png */; };
+		CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0C1FF8229200375426 /* LYNavigationController.swift */; };
+		CDC57D0F1FF822AF00375426 /* LYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +100,12 @@
 		CDC57CFA1FF76FF800375426 /* LYConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYConst.swift; sourceTree = "<group>"; };
 		CDC57CFE1FF80E9A00375426 /* LYPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYPostViewController.swift; sourceTree = "<group>"; };
 		CDC57D011FF80EC700375426 /* LYPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYPostCell.swift; sourceTree = "<group>"; };
+		CDC57D031FF820C300375426 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		CDC57D051FF820D000375426 /* unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlike.png; sourceTree = "<group>"; };
+		CDC57D071FF820DC00375426 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		CDC57D091FF820E600375426 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		CDC57D0C1FF8229200375426 /* LYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNavigationController.swift; sourceTree = "<group>"; };
+		CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYTabBarController.swift; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +180,7 @@
 		CD1B05651FF5320400C1420C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CDC57D0B1FF8226400375426 /* Controller */,
 				CD540F3D1FF5089D009D0362 /* Main.storyboard */,
 			);
 			path = Main;
@@ -253,6 +266,10 @@
 		CD7C0A3F1FF53DAE00540F73 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CDC57D091FF820E600375426 /* more.png */,
+				CDC57D071FF820DC00375426 /* comment.png */,
+				CDC57D051FF820D000375426 /* unlike.png */,
+				CDC57D031FF820C300375426 /* like.png */,
 				CDC57CF81FF76CE200375426 /* pbg.jpg */,
 				CD7C0A451FF5718F00540F73 /* bg.jpg */,
 				CD7C0A401FF53DBD00540F73 /* pp.jpg */,
@@ -387,6 +404,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CDC57D0B1FF8226400375426 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDC57D0C1FF8229200375426 /* LYNavigationController.swift */,
+				CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		EE778B2526E217BAA93FC0B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,11 +541,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC57D041FF820C300375426 /* like.png in Resources */,
 				CD540F441FF5089D009D0362 /* LaunchScreen.storyboard in Resources */,
 				CD7C0A441FF5707A00540F73 /* Pacifico.ttf in Resources */,
 				CD7C0A411FF53DBD00540F73 /* pp.jpg in Resources */,
 				CDC57CF91FF76CE200375426 /* pbg.jpg in Resources */,
 				CD540F411FF5089D009D0362 /* Assets.xcassets in Resources */,
+				CDC57D0A1FF820E600375426 /* more.png in Resources */,
+				CDC57D061FF820D000375426 /* unlike.png in Resources */,
+				CDC57D081FF820DC00375426 /* comment.png in Resources */,
 				CD7C0A461FF5718F00540F73 /* bg.jpg in Resources */,
 				CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */,
 			);
@@ -714,7 +744,9 @@
 				CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */,
 				CD835B201FF6124C00BA0DA5 /* LYHomePictureCell.swift in Sources */,
 				CDC57CFF1FF80E9A00375426 /* LYPostViewController.swift in Sources */,
+				CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */,
 				CD835B1B1FF60F5000BA0DA5 /* LYHomeViewController.swift in Sources */,
+				CDC57D0F1FF822AF00375426 /* LYTabBarController.swift in Sources */,
 				CD835B1E1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift in Sources */,
 				CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */,
 				CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */,

@@ -298,7 +298,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="r7m-ib-UPU">
             <objects>
-                <tabBarController storyboardIdentifier="TabBar" id="X6V-Ul-e57" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" id="X6V-Ul-e57" customClass="LYTabBarController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="x5R-Tb-poW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -646,11 +646,11 @@
             </objects>
             <point key="canvasLocation" x="-1089" y="-1810"/>
         </scene>
-        <!--Item-->
+        <!--我的-->
         <scene sceneID="2TV-8q-SVw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1iW-Z9-NQc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qVD-Xl-u0P"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1iW-Z9-NQc" customClass="LYNavigationController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我的" image="home" id="qVD-Xl-u0P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zaJ-iL-mVi">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -956,7 +956,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2Kp-D0-i7d">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v84-B9-qnL" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v84-B9-qnL" customClass="LYNavigationController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jHa-rN-wCo">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -971,11 +971,11 @@
             </objects>
             <point key="canvasLocation" x="-1295" y="-160"/>
         </scene>
-        <!--Item-->
+        <!--上传-->
         <scene sceneID="c6C-xr-FR0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrG-nM-gOe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Flh-QX-XU9"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrG-nM-gOe" customClass="LYNavigationController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="上传" image="upload" id="Flh-QX-XU9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bhp-wg-RMu">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1093,20 +1093,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0B-GP-1hr">
-                                            <rect key="frame" x="10" y="422" width="46" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0B-GP-1hr">
+                                            <rect key="frame" x="10" y="422" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="喜爱"/>
+                                            <state key="normal" image="unlike.png"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNd-rz-SYf">
-                                            <rect key="frame" x="85" y="422" width="39" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNd-rz-SYf">
+                                            <rect key="frame" x="96" y="422" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="评论"/>
+                                            <state key="normal" image="comment.png"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVG-8c-Tc6">
-                                            <rect key="frame" x="50" y="427" width="11" height="21"/>
+                                            <rect key="frame" x="50" y="427" width="23" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1126,11 +1124,10 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3R-6i-BDg">
-                                            <rect key="frame" x="334" y="422" width="31" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3R-6i-BDg">
+                                            <rect key="frame" x="335" y="422" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="更多"/>
+                                            <state key="normal" image="more.png"/>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -1156,12 +1153,17 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fet-QT-aXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="180" y="518.59070464767615"/>
+            <point key="canvasLocation" x="180" y="517.6911544227886"/>
         </scene>
     </scenes>
     <resources>
         <image name="bg.jpg" width="640" height="1136"/>
+        <image name="comment.png" width="270" height="270"/>
+        <image name="home" width="25" height="25"/>
+        <image name="more.png" width="270" height="270"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
+        <image name="unlike.png" width="270" height="270"/>
+        <image name="upload" width="22" height="22"/>
     </resources>
 </document>

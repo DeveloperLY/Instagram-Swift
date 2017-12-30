@@ -49,13 +49,13 @@ class LYUploadViewController: UIViewController {
     private func alignment() -> Void {
         imageContentView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view).offset(15.0)
-            make.top.equalTo(self.view).offset(LYNavigatorBarHeight + 35.0)
+            make.top.equalTo(self.view).offset(15.0)
             make.width.height.equalTo(LYScreenW / 4.5)
         }
         
         pictureImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view).offset(15.0)
-            make.top.equalTo(self.view).offset(LYNavigatorBarHeight + 35.0)
+            make.top.equalTo(self.view).offset(15.0)
             make.width.height.equalTo(LYScreenW / 4.5)
         }
         
@@ -73,8 +73,7 @@ class LYUploadViewController: UIViewController {
         }
         
         publishButton.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self.view)
-            make.bottom.equalTo(self.view).offset(-(LYScreenW / 8))
+            make.left.right.bottom.equalTo(self.view)
             make.height.equalTo(LYScreenW / 8)
         }
     }
@@ -162,9 +161,9 @@ extension LYUploadViewController: UIImagePickerControllerDelegate, UINavigationC
     // 放大或缩小图片
     @objc func zoomImageTap(_ recognizer: UITapGestureRecognizer) -> Void {
         pictureImageView.snp.remakeConstraints { (make) in
-            if pictureImageView.center == self.view.center {
+            if pictureImageView.frame.width == LYScreenW {
                 make.left.equalTo(self.view).offset(15.0)
-                make.top.equalTo(self.view).offset(LYNavigatorBarHeight + 35.0)
+                make.top.equalTo(self.view).offset(15.0)
                 make.width.height.equalTo(LYScreenW / 4.5)
                 
                 UIView.animate(withDuration: 0.3, animations: {
