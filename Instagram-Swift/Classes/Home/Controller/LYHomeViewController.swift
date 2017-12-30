@@ -254,4 +254,11 @@ extension LYHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width / 3, height: self.view.frame.width / 3)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        postuuid.append(puuidArray[indexPath.row])
+        
+        let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as! LYPostViewController
+        self.navigationController?.pushViewController(postViewController, animated: true)
+    }
 }
