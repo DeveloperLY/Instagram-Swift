@@ -30,6 +30,9 @@
 		CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */; };
 		CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */; };
 		CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */; };
+		CDC57CF71FF76CB100375426 /* LYUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57CF61FF76CB100375426 /* LYUploadViewController.swift */; };
+		CDC57CF91FF76CE200375426 /* pbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDC57CF81FF76CE200375426 /* pbg.jpg */; };
+		CDC57CFB1FF76FF800375426 /* LYConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57CFA1FF76FF800375426 /* LYConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,9 @@
 		CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersCell.swift; sourceTree = "<group>"; };
 		CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYGuestViewController.swift; sourceTree = "<group>"; };
 		CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYEditInfoViewController.swift; sourceTree = "<group>"; };
+		CDC57CF61FF76CB100375426 /* LYUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYUploadViewController.swift; sourceTree = "<group>"; };
+		CDC57CF81FF76CE200375426 /* pbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pbg.jpg; sourceTree = "<group>"; };
+		CDC57CFA1FF76FF800375426 /* LYConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYConst.swift; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,7 @@
 		CD1B05611FF51B9300C1420C /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				CDC57CFA1FF76FF800375426 /* LYConst.swift */,
 				CD1B05621FF51BD100C1420C /* ConstConfig.swift */,
 			);
 			path = Config;
@@ -140,6 +147,7 @@
 		CD1B05641FF531DE00C1420C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CDC57CF41FF76C3E00375426 /* Publish */,
 				CD835B301FF65DBB00BA0DA5 /* Guest */,
 				CD835B261FF6473100BA0DA5 /* Follower */,
 				CD835B171FF60F0700BA0DA5 /* Home */,
@@ -240,6 +248,7 @@
 		CD7C0A3F1FF53DAE00540F73 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CDC57CF81FF76CE200375426 /* pbg.jpg */,
 				CD7C0A451FF5718F00540F73 /* bg.jpg */,
 				CD7C0A401FF53DBD00540F73 /* pp.jpg */,
 			);
@@ -328,6 +337,22 @@
 			isa = PBXGroup;
 			children = (
 				CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CDC57CF41FF76C3E00375426 /* Publish */ = {
+			isa = PBXGroup;
+			children = (
+				CDC57CF51FF76C9100375426 /* Controller */,
+			);
+			path = Publish;
+			sourceTree = "<group>";
+		};
+		CDC57CF51FF76C9100375426 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDC57CF61FF76CB100375426 /* LYUploadViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -463,6 +488,7 @@
 				CD540F441FF5089D009D0362 /* LaunchScreen.storyboard in Resources */,
 				CD7C0A441FF5707A00540F73 /* Pacifico.ttf in Resources */,
 				CD7C0A411FF53DBD00540F73 /* pp.jpg in Resources */,
+				CDC57CF91FF76CE200375426 /* pbg.jpg in Resources */,
 				CD540F411FF5089D009D0362 /* Assets.xcassets in Resources */,
 				CD7C0A461FF5718F00540F73 /* bg.jpg in Resources */,
 				CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */,
@@ -529,12 +555,14 @@
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloudCrashReporting/AVOSCloudCrashReporting.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloudIM/AVOSCloudIM.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloudCrashReporting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloudIM.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -645,8 +673,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */,
+				CDC57CF71FF76CB100375426 /* LYUploadViewController.swift in Sources */,
 				CD835B2C1FF6478600BA0DA5 /* LYFollowersController.swift in Sources */,
 				CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */,
+				CDC57CFB1FF76FF800375426 /* LYConst.swift in Sources */,
 				CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */,
 				CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */,
 				CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */,

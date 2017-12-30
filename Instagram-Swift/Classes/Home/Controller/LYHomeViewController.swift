@@ -29,8 +29,7 @@ class LYHomeViewController: UICollectionViewController {
         // 设置集合视图在垂直方向上反弹的效果
         self.collectionView?.alwaysBounceVertical = true
         
-        title = AVUser.current()?.username
-        
+        self.navigationItem.title = AVUser.current()?.username
         
         // 设置刷新控件
         refresher = UIRefreshControl()
@@ -42,6 +41,7 @@ class LYHomeViewController: UICollectionViewController {
         
         // 监听数据刷新
         NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(uploaded(_:)), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,6 +110,10 @@ class LYHomeViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
     
+    @objc func uploaded(_ notification: Notification) -> Void {
+        loadPosts()
+    }
+    
     @IBAction func logout(_ sender: UIBarButtonItem) {
         // 退出用户登录
         AVUser.logOut()
@@ -135,7 +139,7 @@ class LYHomeViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return pictureArray.count * 20
+        return pictureArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -198,7 +202,7 @@ class LYHomeViewController: UICollectionViewController {
     
         // Configure the cell
         // 从pictureArray 中获取图片
-        pictureArray[0].getDataInBackground { (data: Data?, error: Error?) in
+        pictureArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
             if error == nil {
                 cell.pictureImageView.image = UIImage(data: data!)
             } else {
@@ -212,7 +216,7 @@ class LYHomeViewController: UICollectionViewController {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension LYHomeViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: self.view.frame.width / 3, height: self.view.frame.width / 3)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width / 3, height: self.view.frame.width / 3)
+    }
 }

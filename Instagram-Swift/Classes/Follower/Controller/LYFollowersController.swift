@@ -20,7 +20,7 @@ class LYFollowersController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = show
+        self.navigationItem.title = show
         
         if show == "关 注 者" {
             loadFollowers()

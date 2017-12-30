@@ -306,6 +306,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="1iW-Z9-NQc" kind="relationship" relationship="viewControllers" id="xBq-bh-d8W"/>
+                        <segue destination="mrG-nM-gOe" kind="relationship" relationship="viewControllers" id="FnV-SS-gUd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXe-ni-csP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -320,7 +321,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cph-uv-NO2">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="cph-uv-NO2">
                             <size key="itemSize" width="106" height="106"/>
                             <size key="headerReferenceSize" width="50" height="240"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -334,7 +335,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qaX-hc-DvY">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qaX-hc-DvY">
                                             <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                         </imageView>
                                     </subviews>
@@ -497,7 +498,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSe-9g-KYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2196" y="785"/>
+            <point key="canvasLocation" x="-2103" y="355"/>
         </scene>
         <!--Followers Controller-->
         <scene sceneID="sjt-nT-JQQ">
@@ -569,7 +570,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNB-9B-2FA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1399" y="299"/>
+            <point key="canvasLocation" x="143" y="355"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="tkK-JK-mLD">
@@ -662,7 +663,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZh-Cu-Oan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2921" y="785"/>
+            <point key="canvasLocation" x="-2858" y="355"/>
         </scene>
         <!--Guest View Controller-->
         <scene sceneID="FOM-sC-6BG">
@@ -672,7 +673,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PQa-nf-5go">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="PQa-nf-5go">
                             <size key="itemSize" width="106" height="106"/>
                             <size key="headerReferenceSize" width="50" height="240"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -686,7 +687,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h5A-sO-YQo">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="h5A-sO-YQo">
                                             <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                         </imageView>
                                     </subviews>
@@ -849,7 +850,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVJ-nB-aST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="299"/>
+            <point key="canvasLocation" x="892" y="355"/>
         </scene>
         <!--Edit Info View Controller-->
         <scene sceneID="Zzx-6M-vOi">
@@ -950,7 +951,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgg-Jx-aNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="977"/>
+            <point key="canvasLocation" x="-586" y="355"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Kp-D0-i7d">
@@ -968,11 +969,97 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pie-IG-I87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1398" y="976"/>
+            <point key="canvasLocation" x="-1335" y="354"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="c6C-xr-FR0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrG-nM-gOe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Flh-QX-XU9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bhp-wg-RMu">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kK7-fw-pzS" kind="relationship" relationship="rootViewController" id="vq1-wY-bEY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E8r-eW-k3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2858" y="1234"/>
+        </scene>
+        <!--Upload View Controller-->
+        <scene sceneID="EfU-Qr-hsn">
+            <objects>
+                <viewController storyboardIdentifier="UploadViewController" id="kK7-fw-pzS" customClass="LYUploadViewController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rwn-Ws-hOq"/>
+                        <viewControllerLayoutGuide type="bottom" id="UEy-UN-kui"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aSn-0W-ijD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bP6-0H-fsK">
+                                <rect key="frame" x="15" y="72" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5n4-Py-dSI">
+                                <rect key="frame" x="119" y="72" width="240" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzy-8a-CUf">
+                                <rect key="frame" x="0.0" y="578" width="375" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="发  布">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="publishButtonDidClick:" destination="kK7-fw-pzS" eventType="touchUpInside" id="Jbl-Kv-Duh"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGF-ej-Nhc">
+                                <rect key="frame" x="15" y="164" width="90" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="移 除"/>
+                                <connections>
+                                    <action selector="removeButtonDidClick:" destination="kK7-fw-pzS" eventType="touchUpInside" id="zwq-Fk-0CJ"/>
+                                </connections>
+                            </button>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4Ml-1f-K2t">
+                                <rect key="frame" x="15" y="72" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="XJO-PX-eVh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Lyt-rW-TbI"/>
+                    <connections>
+                        <outlet property="imageContentView" destination="bP6-0H-fsK" id="lj8-V5-A12"/>
+                        <outlet property="pictureImageView" destination="4Ml-1f-K2t" id="Uar-Q3-aKM"/>
+                        <outlet property="publishButton" destination="bzy-8a-CUf" id="S00-as-hze"/>
+                        <outlet property="removeButton" destination="vGF-ej-Nhc" id="uMD-e6-c66"/>
+                        <outlet property="titleTextView" destination="5n4-Py-dSI" id="Yvc-lG-rv9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Oz-CT-J4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2103" y="1234"/>
         </scene>
     </scenes>
     <resources>
         <image name="bg.jpg" width="640" height="1136"/>
+        <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
     </resources>
 </document>
