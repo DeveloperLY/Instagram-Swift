@@ -36,6 +36,13 @@ class LYUploadViewController: UIViewController {
         // 让UI回到初始状态
         pictureImageView.image = UIImage(named: "pbg.jpg")
         titleTextView.text = ""
+        
+        // 默认状态下禁用 publishButton 按钮
+        publishButton.isEnabled = false
+        publishButton.backgroundColor = .lightGray
+        
+        // 隐藏移除按钮
+        removeButton.isHidden = true
     }
     
     // MARK: - Pivate Methods
