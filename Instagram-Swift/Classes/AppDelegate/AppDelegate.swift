@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        })
         
+        window?.backgroundColor = .white
+        
         return true
     }
 

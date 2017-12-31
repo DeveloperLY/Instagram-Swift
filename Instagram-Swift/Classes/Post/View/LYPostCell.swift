@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVOSCloud
 
 class LYPostCell: UITableViewCell {
     
@@ -85,7 +86,83 @@ class LYPostCell: UITableViewCell {
         
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.clipsToBounds = true
+        
+        // 双击图片添加喜欢
+        let likeTap = UITapGestureRecognizer(target: self, action: #selector(likeTapped(_:)))
+        likeTap.numberOfTapsRequired = 2
+        pictureImageView.addGestureRecognizer(likeTap)
     }
+    
+    // MARK: - Event/Touch
+    @IBAction func likeButtonDidClick(_ sender: UIButton) {
+        let isLike = sender.isSelected
+        
+        if !isLike {
+            let object = AVObject(className: "Likes")
+            object["by"] = AVUser.current()?.objectId
+            object["to"] = puuidLabel.text
+            object.saveInBackground({ (success: Bool, error: Error?) in
+                if success {
+                    self.likeButton.isSelected = true
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "liked"), object: nil)
+                }
+            })
+        } else {
+            let query = AVQuery(className: "Likes")
+            query.whereKey("by", equalTo: AVUser.current()?.objectId ?? "")
+            query.whereKey("to", equalTo: puuidLabel.text ?? "")
+            query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                for object in objects! {
+                    // 有记录就从服务器上删除
+                    (object as AnyObject).deleteInBackground({ (success: Bool, error: Error?) in
+                        if success {
+                            self.likeButton.isSelected = false
+                            
+                            // 发送通知
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "liked"), object: nil)
+                        }
+                    })
+                }
+            })
+        }
+        
+    }
+    
+    
+    @objc func likeTapped(_ tapGestureRecognizer: UITapGestureRecognizer) -> Void {
+        // 创建交换动画
+        let likeImageView = UIImageView(image: UIImage(named: "unlike.png"))
+        likeImageView.frame.size.width = pictureImageView.frame.width / 1.5
+        likeImageView.frame.size.height = pictureImageView.frame.height / 1.5
+        likeImageView.center = pictureImageView.center
+        likeImageView.alpha = 0.8
+        self.addSubview(likeImageView)
+        
+        // 动画
+        UIView.animate(withDuration: 0.4) {
+            likeImageView.alpha = 0
+            likeImageView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        }
+        
+        // 修改服务器数据
+        if !likeButton.isSelected {
+            let object = AVObject(className: "Likes")
+            object["by"] = AVUser.current()?.objectId
+            object["to"] = puuidLabel.text
+            object.saveInBackground({ (success: Bool, error: Error?) in
+                if success {
+                    self.likeButton.isSelected = true
+                    
+                    // 发送通知
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "liked"), object: nil)
+                }
+            })
+            
+        }
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

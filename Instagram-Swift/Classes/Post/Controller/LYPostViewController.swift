@@ -38,6 +38,9 @@ class LYPostViewController: UITableViewController {
         tableView.estimatedRowHeight = 550.0
         
         loadData()
+        
+        // 监听通知
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: NSNotification.Name(rawValue: "liked"), object: nil)
     }
     
     func loadData() -> Void {
@@ -81,6 +84,43 @@ class LYPostViewController: UITableViewController {
             postuuid.removeLast()
         }
     }
+    
+    @objc func refresh(_ notification: Notification) -> Void {
+        tableView.reloadData()
+    }
+    
+    @IBAction func usernameButtonDidClick(_ sender: UIButton) {
+        // 按钮 index
+        let indexPath = sender.layer.value(forKey: "index") as! IndexPath
+        
+        // 获取点击Cell
+        let cell = tableView.cellForRow(at: indexPath) as! LYPostCell
+        if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
+            let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+            self.navigationController?.pushViewController(homeViewController, animated: true)
+        } else {
+            let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+            self.navigationController?.pushViewController(guestViewController, animated: true)
+        }
+        
+    }
+    
+    @IBAction func commentButtonDidClick(_ sender: UIButton) {
+        let indexPath = sender.layer.value(forKey: "index") as! IndexPath
+        
+        // 获取点击Cell
+        let cell = tableView.cellForRow(at: indexPath) as! LYPostCell
+        
+        // 存储相关数据到全局变量
+        commentuuid.append(cell.puuidLabel.text!)
+        commentuuid.append((cell.usernameButton.titleLabel?.text)!)
+        
+        // 进入评论页面
+        let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as! LYCommentViewController
+        self.navigationController?.pushViewController(commentViewController, animated: true)
+        
+    }
+    
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,6 +180,30 @@ class LYPostViewController: UITableViewController {
             cell.dateLabel.text = "\(difference.weekOfMonth!)周."
         }
         
+        // 处理用户喜欢按钮
+        let didLike = AVQuery(className: "Likes")
+        didLike.whereKey("by", equalTo: AVUser.current()?.objectId ?? "")
+        didLike.whereKey("to", equalTo: cell.puuidLabel.text ?? "")
+        didLike.countObjectsInBackground { (count: Int, error: Error?) in
+            if count == 0 {
+                cell.likeButton.isSelected = false
+            } else {
+                cell.likeButton.isSelected = true
+            }
+        }
+        
+        // 计算帖子喜爱总数
+        let countLikes = AVQuery(className: "Likes")
+        countLikes.whereKey("to", equalTo: cell.puuidLabel.text ?? "")
+        countLikes.countObjectsInBackground { (count: Int, error: Error?) in
+            cell.likeLabel.text = String(count)
+        }
+        
+        // 将indexPath赋值给usernameButton 的 layer属性
+        cell.usernameButton.layer.setValue(indexPath, forKey: "index")
+        
+        // 将indexPath赋值给commentButton 的 layer属性
+        cell.commentButton.layer.setValue(indexPath, forKey: "index")
         return cell
     }
 
