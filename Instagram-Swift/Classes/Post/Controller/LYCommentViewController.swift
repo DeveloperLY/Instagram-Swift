@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVOSCloud
 
 var commentuuid = [String]()
 var commentowner = [String]()
@@ -22,7 +22,7 @@ class LYCommentViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     
     
-    var refresher = UIRefreshControl()
+    var refresh = UIRefreshControl()
     
     // 重置UI的默认值
     var tableViewHeight: CGFloat = 0.0
@@ -31,6 +31,14 @@ class LYCommentViewController: UIViewController {
     
     // 存储keyboard大小的变量
     var keyboard = CGRect()
+    
+    var usernameArray = [String]()
+    var avatarArray = [AVFile]()
+    var commentArray = [String]()
+    var dateArray = [Date]()
+    
+    // page size
+    var page: Int = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +65,7 @@ class LYCommentViewController: UIViewController {
         
         alignment()
         
-        self.tableView.backgroundColor = .red
+        loadComments()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,20 +85,18 @@ class LYCommentViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
 
+    // MARK: - Private Methods
     func alignment() -> Void {
         let width = self.view.frame.width
         let height = self.view.frame.height
         
         tableView.frame = CGRect(x: 0, y: 0, width: width, height: height / 1.096 - self.navigationController!.navigationBar.frame.height - 20)
-        
-        tableView.estimatedRowHeight = width / 5.33
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.dataSource = self
+        tableView.delegate = self
         
         commentTextView.frame = CGRect(x: 10, y: tableView.frame.height + height / 56.8, width: width / 1.306, height: 33)
-        
         commentTextView.layer.cornerRadius = commentTextView.frame.width / 50
-        
-//        commentTextView.delegate = self
+        commentTextView.delegate = self
         
         sendButton.frame = CGRect(x: commentTextView.frame.origin.x + commentTextView.frame.width + width / 32, y: commentTextView.frame.origin.y, width: width - (commentTextView.frame.origin.x + commentTextView.frame.width) - width / 32 * 2, height: commentTextView.frame.height)
         
@@ -103,6 +109,91 @@ class LYCommentViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    func loadComments() {
+        //  合计出所有的评论的数量
+        let countQuery = AVQuery(className: "Comments")
+        countQuery.whereKey("to", equalTo: commentuuid.last!)
+        countQuery.countObjectsInBackground({ (count: Int, error: Error?) in
+            if self.page < count {
+                self.refresh.addTarget(self, action: #selector(self.loadMore), for: .valueChanged)
+                self.tableView.addSubview(self.refresh)
+            }
+            
+            // 获取最新的self.page数量的评论
+            let query = AVQuery(className: "Comments")
+            query.whereKey("to", equalTo: commentuuid.last!)
+            query.skip = count - self.page
+            query.addAscendingOrder("createdAt")
+            query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    // 清空数组
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.commentArray.removeAll(keepingCapacity: false)
+                    self.avatarArray.removeAll(keepingCapacity: false)
+                    self.dateArray.removeAll(keepingCapacity: false)
+                    
+                    for object in objects! {
+                        self.usernameArray.append((object as AnyObject).object(forKey: "username") as! String)
+                        self.avatarArray.append((object as AnyObject).object(forKey: "avatar") as! AVFile)
+                        self.commentArray.append((object as AnyObject).object(forKey: "comment") as! String)
+                        self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
+                        
+                        self.tableView.scrollToRow(at: IndexPath(row: self.commentArray.count - 1, section: 0)  , at: .bottom, animated: false)
+                    }
+                    self.tableView.reloadData()
+                    
+                } else {
+                    print(error?.localizedDescription ?? "加载评论数据失败")
+                }
+            })
+        })
+    }
+    
+    @objc func loadMore() {
+        // 合计出所有的评论的数量
+        let countQuery = AVQuery(className: "Comments")
+        countQuery.whereKey("to", equalTo: commentuuid.last!)
+        countQuery.countObjectsInBackground({ (count: Int, error: Error?) in
+            // 让refresh停止刷新动画
+            self.refresh.endRefreshing()
+            
+            if self.page >= count {
+                self.refresh.removeFromSuperview()
+            }
+            
+            // 载入更多的评论
+            if self.page < count {
+                self.page = self.page + 15
+                
+                // 从云端查询page个记录
+                let query = AVQuery(className: "Comments")
+                query.whereKey("to", equalTo: commentuuid.last!)
+                query.skip = count - self.page
+                query.addAscendingOrder("createdAt")
+                query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                    if error == nil {
+                        // 清空数组
+                        self.usernameArray.removeAll(keepingCapacity: false)
+                        self.commentArray.removeAll(keepingCapacity: false)
+                        self.avatarArray.removeAll(keepingCapacity: false)
+                        self.dateArray.removeAll(keepingCapacity: false)
+                        
+                        for object in objects! {
+                            self.usernameArray.append((object as AnyObject).object(forKey: "username") as! String)
+                            self.avatarArray.append((object as AnyObject).object(forKey: "avatar") as! AVFile)
+                            self.commentArray.append((object as AnyObject).object(forKey: "comment") as! String)
+                            self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
+                        }
+                        self.tableView.reloadData()
+                    } else {
+                        print(error?.localizedDescription ?? "加载更多评论失败")
+                    }
+                })
+            }
+        })
+    }
+    
+    // MARK: - Event/Touch
     // 当键盘出现的时候会调用该方法
     @objc func keyboardWillShow(_ notification: Notification) {
         // 获取到键盘的大小
@@ -140,5 +231,94 @@ class LYCommentViewController: UIViewController {
         if !commentowner.isEmpty {
             commentowner.removeLast()
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension LYCommentViewController: UITextViewDelegate {
+    // 当用户输入时调用
+    func textViewDidChange(_ textView: UITextView) {
+        // 如果没有内容禁用发送按钮
+        let spacing = CharacterSet.whitespacesAndNewlines
+        if !commentTextView.text.trimmingCharacters(in: spacing).isEmpty {
+            sendButton.isEnabled = true
+        } else {
+            sendButton.isEnabled = false
+        }
+        
+        if textView.contentSize.height > textView.frame.height && textView.frame.height < 130.0 {
+            
+            let difference = textView.contentSize.height - textView.frame.height
+            textView.frame.origin.y = textView.frame.origin.y - difference
+            textView.frame.size.height = textView.contentSize.height
+            
+            // 上移tableView
+            if textView.contentSize.height + keyboard.height + commentY >= tableView.frame.height {
+                tableView.frame.size.height = tableView.frame.size.height - difference
+            }
+        } else if textView.contentSize.height < textView.frame.height {
+            let difference = textView.frame.height - textView.contentSize.height
+            
+            textView.frame.origin.y = textView.frame.origin.y + difference
+            textView.frame.size.height = textView.contentSize.height
+            
+            // 上移tableView
+            if textView.contentSize.height + keyboard.height + commentY > tableView.frame.height {
+                tableView.frame.size.height = tableView.frame.size.height + difference
+            }
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commentArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! LYCommentCell
+        
+        cell.usernameButton.setTitle(usernameArray[indexPath.row], for: .normal)
+        cell.usernameButton.sizeToFit()
+        cell.commentLabel.text = commentArray[indexPath.row]
+        avatarArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
+            if error != nil {
+                cell.avatarImageView.image = UIImage(data: data!)
+            }
+        }
+        
+        // 评论的时间和当前时间的间隔差
+        let from = dateArray[indexPath.row]
+        let now = Date()
+        let components : Set<Calendar.Component> = [.second, .minute, .hour, .day, .weekOfMonth]
+        let difference = Calendar.current.dateComponents(components, from: from, to: now)
+        
+        if difference.second! <= 0 {
+            cell.dateLabel.text = "现在"
+        }
+        
+        if difference.second! > 0 && difference.minute! <= 0 {
+            cell.dateLabel.text = "\(difference.second!)秒."
+        }
+        
+        if difference.minute! > 0 && difference.hour! <= 0 {
+            cell.dateLabel.text = "\(difference.minute!)分."
+        }
+        
+        if difference.hour! > 0 && difference.day! <= 0 {
+            cell.dateLabel.text = "\(difference.hour!)时."
+        }
+        
+        if difference.day! > 0 && difference.weekOfMonth! <= 0 {
+            cell.dateLabel.text = "\(difference.day!)天."
+        }
+        
+        if difference.weekOfMonth! > 0 {
+            cell.dateLabel.text = "\(difference.weekOfMonth!)周."
+        }
+        
+        return cell
     }
 }
