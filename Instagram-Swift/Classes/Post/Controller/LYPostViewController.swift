@@ -55,7 +55,7 @@ class LYPostViewController: UITableViewController {
             for object in objects! {
                 self.avatarArray.append((object as AnyObject).value(forKey: "avatar") as! AVFile)
                 self.usernameArray.append((object as AnyObject).value(forKey: "username") as! String)
-                self.dateArray.append((object as AnyObject).createdAt as! Date)
+                self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
                 self.pictureArray.append((object as AnyObject).value(forKey: "picture") as! AVFile)
                 self.puuidArray.append((object as AnyObject).value(forKey: "puuid") as! String)
                 self.titleArray.append((object as AnyObject).value(forKey: "title") as! String)
