@@ -113,7 +113,7 @@ class LYPostViewController: UITableViewController {
         
         // 存储相关数据到全局变量
         commentuuid.append(cell.puuidLabel.text!)
-        commentuuid.append((cell.usernameButton.titleLabel?.text)!)
+        commentowner.append((cell.usernameButton.titleLabel?.text)!)
         
         // 进入评论页面
         let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as! LYCommentViewController
@@ -157,27 +157,27 @@ class LYPostViewController: UITableViewController {
         let difference = Calendar.current.dateComponents(components, from: from, to: now)
         
         if difference.second! <= 0 {
-            cell.dateLabel.text = "现在"
+            cell.dateLabel.text = "刚刚"
         }
         
         if difference.second! > 0 && difference.minute! <= 0 {
-            cell.dateLabel.text = "\(difference.second!)秒."
+            cell.dateLabel.text = "\(difference.second!)秒前"
         }
         
         if difference.minute! > 0 && difference.hour! <= 0 {
-            cell.dateLabel.text = "\(difference.minute!)分."
+            cell.dateLabel.text = "\(difference.minute!)分前"
         }
         
         if difference.hour! > 0 && difference.day! <= 0 {
-            cell.dateLabel.text = "\(difference.hour!)时."
+            cell.dateLabel.text = "\(difference.hour!)时前"
         }
         
         if difference.day! > 0 && difference.weekOfMonth! <= 0 {
-            cell.dateLabel.text = "\(difference.day!)天."
+            cell.dateLabel.text = "\(difference.day!)天前"
         }
         
         if difference.weekOfMonth! > 0 {
-            cell.dateLabel.text = "\(difference.weekOfMonth!)周."
+            cell.dateLabel.text = "\(difference.weekOfMonth!)周前"
         }
         
         // 处理用户喜欢按钮
