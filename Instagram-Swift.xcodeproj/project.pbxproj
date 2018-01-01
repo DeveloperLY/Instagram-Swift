@@ -97,7 +97,6 @@
 		CD835B1A1FF60F5000BA0DA5 /* LYHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHomeViewController.swift; sourceTree = "<group>"; };
 		CD835B1D1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHomeHeaderView.swift; sourceTree = "<group>"; };
 		CD835B1F1FF6124C00BA0DA5 /* LYHomePictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHomePictureCell.swift; sourceTree = "<group>"; };
-		CD835B251FF626C200BA0DA5 /* Instagram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instagram-Bridging-Header.h"; sourceTree = "<group>"; };
 		CD835B2B1FF6478600BA0DA5 /* LYFollowersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersController.swift; sourceTree = "<group>"; };
 		CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersCell.swift; sourceTree = "<group>"; };
 		CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYGuestViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +181,6 @@
 				CD1B05661FF5321300C1420C /* AppDelegate */,
 				CD1B05651FF5320400C1420C /* Main */,
 				CD1B05611FF51B9300C1420C /* Config */,
-				CD835B251FF626C200BA0DA5 /* Instagram-Bridging-Header.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -633,6 +631,7 @@
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloudCrashReporting/AVOSCloudCrashReporting.framework",
 				"${BUILT_PRODUCTS_DIR}/AVOSCloudIM/AVOSCloudIM.framework",
+				"${BUILT_PRODUCTS_DIR}/KILabel/KILabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -640,6 +639,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloudCrashReporting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloudIM.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KILabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -943,7 +943,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.developerly.instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instagram-Swift/Classes/Instagram-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -962,7 +962,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.developerly.instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Instagram-Swift/Classes/Instagram-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

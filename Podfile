@@ -11,6 +11,7 @@ target 'Instagram-Swift' do
   pod 'AVOSCloudIM'             # 实时通信模块
   pod 'AVOSCloudCrashReporting' # 崩溃报告模块
   pod 'SnapKit', '~> 4.0.0'
+  pod 'KILabel', '~> 1.0.1'
 
   target 'Instagram-SwiftTests' do
     inherit! :search_paths

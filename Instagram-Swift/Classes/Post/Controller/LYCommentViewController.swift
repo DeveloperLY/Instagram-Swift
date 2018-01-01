@@ -250,6 +250,40 @@ class LYCommentViewController: UIViewController {
         commentObj["comment"] = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         commentObj.saveEventually()
         
+        // 发送Hashtag到云端
+        let words: [String] = commentTextView.text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        
+        for var word in words {
+            // 定义正则表达式
+            let pattern = "#[^#]+";
+            let regular = try! NSRegularExpression(pattern: pattern, options:.caseInsensitive)
+            let results = regular.matches(in: word, options: .reportProgress , range: NSMakeRange(0, word.count))
+            
+            //输出截取结果
+            print("符合的结果有\(results.count)个")
+            for result in results {
+                word = (word as NSString).substring(with: result.range)
+            }
+            
+            if word.hasPrefix("#") {
+                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                word = word.trimmingCharacters(in: CharacterSet.symbols)
+                
+                let hashtagObj = AVObject(className: "Hashtags")
+                hashtagObj["to"] = commentuuid.last
+                hashtagObj["by"] = AVUser.current()?.username
+                hashtagObj["hashtag"] = word.lowercased()
+                hashtagObj["comment"] = commentTextView.text
+                hashtagObj.saveInBackground({ (success: Bool, error: Error?) in
+                    if success {
+                        print("hashtag \(word) 已经被创建。")
+                    } else {
+                        print(error?.localizedDescription ?? "提交Hashtag失败")
+                    }
+                })
+            }
+        }
+        
         // scroll to bottom
         self.tableView.scrollToRow(at: IndexPath(item: commentArray.count - 1, section: 0), at: .bottom, animated: false)
         
@@ -371,6 +405,29 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
             cell.dateLabel.text = "\(difference.weekOfMonth!)周前"
         }
         
+        // @mentions is tapped
+        cell.commentLabel.userHandleLinkTapHandler = { label, handle, rang in
+            
+            var mention = handle
+            mention = String(mention.dropFirst())
+            
+            if mention.lowercased() == AVUser.current()?.username {
+                let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+                self.navigationController?.pushViewController(homeViewController, animated: true)
+            } else {
+                let query = AVUser.query()
+                query.whereKey("username", equalTo: mention)
+                query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                    if let object = objects?.last {
+                        guestArray.append(object as! AVUser)
+                        
+                        let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                        self.navigationController?.pushViewController(guestViewController, animated: true)
+                    }
+                })
+            }
+        }
+        
         cell.usernameButton.layer.setValue(indexPath, forKey: "index")
         
         return cell
@@ -401,6 +458,19 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                 } else {
                     print(error?.localizedDescription ?? "删除评论失败")
+                }
+            })
+            
+            // 从云端删除 Hashtag
+            let hashtagQuery = AVQuery(className: "Hashtags")
+            hashtagQuery.whereKey("to", equalTo: commentuuid.last ?? "")
+            hashtagQuery.whereKey("by", equalTo: cell.usernameButton.titleLabel?.text ?? "")
+            hashtagQuery.whereKey("comment", equalTo: cell.commentLabel.text ?? "")
+            hashtagQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteEventually()
+                    }
                 }
             })
             
