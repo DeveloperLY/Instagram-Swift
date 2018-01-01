@@ -76,6 +76,14 @@ class LYPostViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = backButton
     }
     
+    // 消息警告
+    func alert(error: String, message: String) {
+        let alert = UIAlertController(title: error, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Event/Touch
     @objc func back(_ sender: UIBarButtonItem) -> Void {
         self.navigationController?.popViewController(animated: true)
@@ -119,6 +127,112 @@ class LYPostViewController: UITableViewController {
         let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as! LYCommentViewController
         self.navigationController?.pushViewController(commentViewController, animated: true)
         
+    }
+    
+    @IBAction func moreButtonDidClick(_ sender: UIButton) {
+        let indexPath = sender.layer.value(forKey: "index") as! IndexPath
+        // 获取点击Cell
+        let cell = tableView.cellForRow(at: indexPath) as! LYPostCell
+        
+        // 删除操作
+        let deleteAction = UIAlertAction(title: "删除", style: .default) { (alertAction: UIAlertAction) in
+            // 删除本地
+            self.usernameArray.remove(at: indexPath.row)
+            self.avatarArray.remove(at: indexPath.row)
+            self.pictureArray.remove(at: indexPath.row)
+            self.dateArray.remove(at: indexPath.row)
+            self.titleArray.remove(at: indexPath.row)
+            self.puuidArray.remove(at: indexPath.row)
+            
+            // 删除云端数据
+            let postQuery = AVQuery(className: "Posts")
+            postQuery.whereKey("puuid", equalTo: cell.puuidLabel.text ?? "")
+            postQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteInBackground({ (success: Bool, error: Error?) in
+                            if success {
+                                // 发送通知到 rootViewController 更新帖子
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "uploaded"), object: nil)
+                                // 销毁当前控制器
+                                self.navigationController?.popViewController(animated: true)
+                            } else {
+                                print(error?.localizedDescription ?? "删除帖子失败")
+                            }
+                        })
+                    }
+                } else {
+                    print(error?.localizedDescription ?? "查询要删除的帖子失败")
+                }
+            })
+            
+            // 删除帖子的 Like 记录
+            let likeQuery = AVQuery(className: "Likes")
+            likeQuery.whereKey("to", equalTo: cell.puuidLabel.text ?? "")
+            likeQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteEventually()
+                    }
+                }
+            })
+            
+            // 删除帖子相关评论
+            let commentQuery = AVQuery(className: "Comments")
+            commentQuery.whereKey("to", equalTo: cell.puuidLabel.text ?? "")
+            commentQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteEventually()
+                    }
+                }
+            })
+            
+            // 删除帖子相关的 Hashtag
+            let hashtagQuery = AVQuery(className: "Hashtags")
+            hashtagQuery.whereKey("to", equalTo: cell.puuidLabel.text ?? "")
+            hashtagQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteEventually()
+                    }
+                }
+            })
+        }
+        
+        let complainAction = UIAlertAction(title: "投诉", style: .default) { (alertAction: UIAlertAction) in
+            // 发送投诉到云端
+            let complainObject = AVObject(className: "Complain")
+            complainObject["by"] = AVUser.current()?.username
+            complainObject["post"] = cell.puuidLabel.text
+            complainObject["to"] = cell.titleLabel.text
+            complainObject["owner"] = cell.usernameButton.titleLabel?.text
+            
+            complainObject.saveInBackground({ (success: Bool, error: Error?) in
+                if success {
+                    self.alert(error: "投诉信息已经被成功提交！", message: "感谢您的支持，我们将关注您提交的投诉！")
+                } else{
+                    self.alert(error: "错误", message: error!.localizedDescription)
+                }
+            })
+        }
+        
+        // 取消操作
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        // 创建 AlertController
+        let alertController = UIAlertController(title: "更多操作", message: nil, preferredStyle: .actionSheet)
+        
+        if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
+            alertController.addAction(deleteAction)
+            alertController.addAction(cancelAction)
+        } else {
+            alertController.addAction(complainAction)
+            alertController.addAction(cancelAction)
+        }
+        
+        // show
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
@@ -204,6 +318,9 @@ class LYPostViewController: UITableViewController {
         
         // 将indexPath赋值给commentButton 的 layer属性
         cell.commentButton.layer.setValue(indexPath, forKey: "index")
+        
+        // 将indexPath赋值给 moreButton 的 layer 属性
+        cell.moreButton.layer.setValue(indexPath, forKey: "index")
         
         // @mentions is tapped
         cell.titleLabel.userHandleLinkTapHandler = { label, handle, rang in

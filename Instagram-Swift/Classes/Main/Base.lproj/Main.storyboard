@@ -1138,6 +1138,9 @@
                                             <rect key="frame" x="335" y="422" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="more.png"/>
+                                            <connections>
+                                                <action selector="moreButtonDidClick:" destination="m4Q-Sw-tFn" eventType="touchUpInside" id="gdo-U6-3KJ"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
