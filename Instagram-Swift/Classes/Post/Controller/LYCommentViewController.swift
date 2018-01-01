@@ -388,7 +388,7 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! LYCommentCell
         
         // Delete
-        let delete = UITableViewRowAction(style: .normal, title: "删 除"){(UITableViewRowAction, IndexPath) -> Void in
+        let delete = UITableViewRowAction(style: .normal, title: " "){(UITableViewRowAction, IndexPath) -> Void in
             // 从云端删除评论
             let commentQuery = AVQuery(className: "Comments")
             commentQuery.whereKey("to", equalTo: commentuuid.last!)
@@ -417,7 +417,7 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         // Address
-        let address = UITableViewRowAction(style: .normal, title: "@Address") {(action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let address = UITableViewRowAction(style: .normal, title: " ") {(action:UITableViewRowAction, indexPath: IndexPath) -> Void in
             
             // 在Text View中包含Address
             self.commentTextView.text = "\(self.commentTextView.text + "@" + self.usernameArray[indexPath.row] + " ")"
@@ -428,7 +428,7 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         // 投诉评论
-        let complain = UITableViewRowAction(style: .normal, title: "投 诉"){(action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let complain = UITableViewRowAction(style: .normal, title: " "){(action: UITableViewRowAction, indexPath: IndexPath) -> Void in
             
             // 发送投诉到云端
             let complainObj = AVObject(className: "Complain")
@@ -450,13 +450,13 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         // 按钮的背景颜色
-        delete.backgroundColor = .red
-        address.backgroundColor = .gray
-        complain.backgroundColor = .gray
+//        delete.backgroundColor = .red
+//        address.backgroundColor = .gray
+//        complain.backgroundColor = .gray
         
-//        delete.backgroundColor = UIColor(patternImage: UIImage(named: "delete.png")!)
-//        address.backgroundColor = UIColor(patternImage: UIImage(named: "address.png")!)
-//        complain.backgroundColor = UIColor(patternImage: UIImage(named: "complain.png")!)
+        delete.backgroundColor = UIColor(patternImage: UIImage(named: "delete.png")!)
+        address.backgroundColor = UIColor(patternImage: UIImage(named: "address.png")!)
+        complain.backgroundColor = UIColor(patternImage: UIImage(named: "complain.png")!)
         
         if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
             return [delete, address]

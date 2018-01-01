@@ -16,7 +16,6 @@
 		CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B056D1FF5336100C1420C /* LYResetPasswordViewController.swift */; };
 		CD25D56D1FF97BE10010913F /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = CD25D56C1FF97BE10010913F /* delete.png */; };
 		CD25D56F1FF97BEA0010913F /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = CD25D56E1FF97BE90010913F /* address.png */; };
-		CD25D5711FF97BF50010913F /* complain.png in Resources */ = {isa = PBXBuildFile; fileRef = CD25D5701FF97BF50010913F /* complain.png */; };
 		CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD540F391FF5089D009D0362 /* AppDelegate.swift */; };
 		CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD540F3D1FF5089D009D0362 /* Main.storyboard */; };
 		CD540F411FF5089D009D0362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD540F401FF5089D009D0362 /* Assets.xcassets */; };
@@ -46,6 +45,7 @@
 		CDC57D0A1FF820E600375426 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC57D091FF820E600375426 /* more.png */; };
 		CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0C1FF8229200375426 /* LYNavigationController.swift */; };
 		CDC57D0F1FF822AF00375426 /* LYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */; };
+		CDF623531FFA96C300F587FF /* complain.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF623521FFA96C300F587FF /* complain.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +79,6 @@
 		CD1B056D1FF5336100C1420C /* LYResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYResetPasswordViewController.swift; sourceTree = "<group>"; };
 		CD25D56C1FF97BE10010913F /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		CD25D56E1FF97BE90010913F /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
-		CD25D5701FF97BF50010913F /* complain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complain.png; sourceTree = "<group>"; };
 		CD540F361FF5089D009D0362 /* Instagram-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD540F391FF5089D009D0362 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD540F3E1FF5089D009D0362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		CDC57D091FF820E600375426 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		CDC57D0C1FF8229200375426 /* LYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNavigationController.swift; sourceTree = "<group>"; };
 		CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYTabBarController.swift; sourceTree = "<group>"; };
+		CDF623521FFA96C300F587FF /* complain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complain.png; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -276,7 +276,7 @@
 		CD7C0A3F1FF53DAE00540F73 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CD25D5701FF97BF50010913F /* complain.png */,
+				CDF623521FFA96C300F587FF /* complain.png */,
 				CD25D56E1FF97BE90010913F /* address.png */,
 				CD25D56C1FF97BE10010913F /* delete.png */,
 				CDC57D091FF820E600375426 /* more.png */,
@@ -568,7 +568,7 @@
 				CDC57D061FF820D000375426 /* unlike.png in Resources */,
 				CDC57D081FF820DC00375426 /* comment.png in Resources */,
 				CD7C0A461FF5718F00540F73 /* bg.jpg in Resources */,
-				CD25D5711FF97BF50010913F /* complain.png in Resources */,
+				CDF623531FFA96C300F587FF /* complain.png in Resources */,
 				CD540F3F1FF5089D009D0362 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
