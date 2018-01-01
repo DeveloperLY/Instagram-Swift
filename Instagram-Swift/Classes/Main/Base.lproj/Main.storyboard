@@ -489,7 +489,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="A7J-uU-KHN">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="OHF-qn-rKu">
+                        <barButtonItem key="rightBarButtonItem" image="logout" id="OHF-qn-rKu">
                             <connections>
                                 <action selector="logout:" destination="dnL-Qj-ZVN" id="wqU-ko-P8s"/>
                             </connections>
@@ -1310,6 +1310,7 @@
         <image name="comment.png" width="270" height="270"/>
         <image name="home" width="25" height="25"/>
         <image name="like.png" width="270" height="270"/>
+        <image name="logout" width="25" height="25"/>
         <image name="more.png" width="270" height="270"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>

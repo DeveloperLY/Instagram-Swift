@@ -27,6 +27,21 @@ class LYFollowersController: UITableViewController {
         } else {
             loadFollowings()
         }
+        
+        // 返回按钮
+        self.navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(back(_:)))
+        self.navigationItem.leftBarButtonItem = backButton
+        
+        // 实现右滑返回
+        let backSeipe = UISwipeGestureRecognizer(target: self, action: #selector(back(_:)))
+        backSeipe.direction = .right
+        self.view.addGestureRecognizer(backSeipe)
+    }
+    
+    @objc func back(_: UIBarButtonItem) -> Void {
+        // 退回控制器之前
+        self.navigationController?.popViewController(animated: true)
     }
 
     // MARK: - loadData

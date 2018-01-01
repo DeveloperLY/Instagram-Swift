@@ -35,7 +35,7 @@ class LYGuestViewController: UICollectionViewController {
         
         // 返回按钮
         self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(back(_:)))
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(back(_:)))
         self.navigationItem.leftBarButtonItem = backButton
         
         // 实现右滑返回
