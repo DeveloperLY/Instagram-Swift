@@ -204,6 +204,40 @@ class LYPostViewController: UITableViewController {
         
         // 将indexPath赋值给commentButton 的 layer属性
         cell.commentButton.layer.setValue(indexPath, forKey: "index")
+        
+        // @mentions is tapped
+        cell.titleLabel.userHandleLinkTapHandler = { label, handle, rang in
+            var mention = handle
+            mention = String(mention.dropFirst())
+            
+            if mention == AVUser.current()?.username {
+                let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+                self.navigationController?.pushViewController(homeViewController, animated: true)
+            } else {
+                let query = AVUser.query()
+                query.whereKey("username", equalTo: mention)
+                query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                    if let object = objects?.last {
+                        guestArray.append(object as! AVUser)
+                        
+                        let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                        self.navigationController?.pushViewController(guestViewController, animated: true)
+                    }
+                })
+            }
+        }
+        
+        // #hashtag is tapped
+        cell.titleLabel.hashtagLinkTapHandler = { label, handle, rang in
+            var mention = handle
+            mention = String(mention.dropFirst())
+            hashtags.append(mention)
+            
+            let hashtagsViewController = self.storyboard?.instantiateViewController(withIdentifier: "HashtagsViewController") as! LYHashtagsViewController
+            self.navigationController?.pushViewController(hashtagsViewController, animated: true)
+            
+        }
+        
         return cell
     }
 

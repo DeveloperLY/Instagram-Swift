@@ -46,6 +46,7 @@
 		CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0C1FF8229200375426 /* LYNavigationController.swift */; };
 		CDC57D0F1FF822AF00375426 /* LYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */; };
 		CDF623531FFA96C300F587FF /* complain.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF623521FFA96C300F587FF /* complain.png */; };
+		CDF623551FFAB5B500F587FF /* LYHashtagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF623541FFAB5B500F587FF /* LYHashtagsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		CDC57D0C1FF8229200375426 /* LYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNavigationController.swift; sourceTree = "<group>"; };
 		CDC57D0E1FF822AF00375426 /* LYTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYTabBarController.swift; sourceTree = "<group>"; };
 		CDF623521FFA96C300F587FF /* complain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complain.png; sourceTree = "<group>"; };
+		CDF623541FFAB5B500F587FF /* LYHashtagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYHashtagsViewController.swift; sourceTree = "<group>"; };
 		E9E80C7E9F8A52559B2082D1 /* Pods-Instagram-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftTests/Pods-Instagram-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F227470D898682BCCD9FA4B1 /* Pods-Instagram-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram-SwiftUITests/Pods-Instagram-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -404,6 +406,7 @@
 			children = (
 				CDC57CFE1FF80E9A00375426 /* LYPostViewController.swift */,
 				CD9D9B071FF8BDEF00376D99 /* LYCommentViewController.swift */,
+				CDF623541FFAB5B500F587FF /* LYHashtagsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				CDC57CFB1FF76FF800375426 /* LYConst.swift in Sources */,
 				CD9D9B081FF8BDEF00376D99 /* LYCommentViewController.swift in Sources */,
 				CD540F3A1FF5089D009D0362 /* AppDelegate.swift in Sources */,
+				CDF623551FFAB5B500F587FF /* LYHashtagsViewController.swift in Sources */,
 				CDC57D021FF80EC700375426 /* LYPostCell.swift in Sources */,
 				CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */,
 				CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */,

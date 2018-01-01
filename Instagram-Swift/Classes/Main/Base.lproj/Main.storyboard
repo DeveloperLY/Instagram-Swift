@@ -1253,6 +1253,54 @@
             </objects>
             <point key="canvasLocation" x="919.20000000000005" y="517.6911544227886"/>
         </scene>
+        <!--Hashtags View Controller-->
+        <scene sceneID="Fis-ca-Cmv">
+            <objects>
+                <collectionViewController storyboardIdentifier="HashtagsViewController" id="Fof-up-EpK" customClass="LYHashtagsViewController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="wJj-CK-6ZH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="wGd-bt-sXi">
+                            <size key="itemSize" width="105" height="105"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HashtagsCell" id="6s8-kT-CeU" customClass="LYHomePictureCell" customModule="Instagram_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="HKT-vM-Q1q">
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="HKT-vM-Q1q" secondAttribute="bottom" id="KQp-2k-1hO"/>
+                                    <constraint firstItem="HKT-vM-Q1q" firstAttribute="leading" secondItem="6s8-kT-CeU" secondAttribute="leading" id="brm-ZV-ltx"/>
+                                    <constraint firstAttribute="trailing" secondItem="HKT-vM-Q1q" secondAttribute="trailing" id="efX-5P-NJe"/>
+                                    <constraint firstItem="HKT-vM-Q1q" firstAttribute="top" secondItem="6s8-kT-CeU" secondAttribute="top" id="rZm-2N-idK"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="pictureImageView" destination="HKT-vM-Q1q" id="4v8-KO-YIy"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Fof-up-EpK" id="l5R-6u-HHt"/>
+                            <outlet property="delegate" destination="Fof-up-EpK" id="yD3-LD-AJi"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wY9-a3-hcT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1664.8" y="517.6911544227886"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg.jpg" width="640" height="1136"/>

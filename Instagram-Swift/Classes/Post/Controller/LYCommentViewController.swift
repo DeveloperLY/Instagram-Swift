@@ -407,11 +407,10 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         
         // @mentions is tapped
         cell.commentLabel.userHandleLinkTapHandler = { label, handle, rang in
-            
             var mention = handle
             mention = String(mention.dropFirst())
             
-            if mention.lowercased() == AVUser.current()?.username {
+            if mention == AVUser.current()?.username {
                 let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
                 self.navigationController?.pushViewController(homeViewController, animated: true)
             } else {
@@ -426,6 +425,17 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
+        }
+        
+        // #hashtag is tapped
+        cell.commentLabel.hashtagLinkTapHandler = { label, handle, rang in
+            var mention = handle
+            mention = String(mention.dropFirst())
+            hashtags.append(mention)
+            
+            let hashtagsViewController = self.storyboard?.instantiateViewController(withIdentifier: "HashtagsViewController") as! LYHashtagsViewController
+            self.navigationController?.pushViewController(hashtagsViewController, animated: true)
+            
         }
         
         cell.usernameButton.layer.setValue(indexPath, forKey: "index")
