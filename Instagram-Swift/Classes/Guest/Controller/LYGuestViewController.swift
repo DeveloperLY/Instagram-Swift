@@ -164,6 +164,13 @@ class LYGuestViewController: UICollectionViewController {
             if error == nil {
                 // 判断是否有用户数据
                 guard let objects = objects, objects.count > 0 else {
+                    let alertController = UIAlertController(title: "\(String(describing: guestArray.last?.username))", message: "用尽力洪荒之力，也没有发现该用户的存在！", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
                     return
                 }
                 

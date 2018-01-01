@@ -339,6 +339,13 @@ class LYPostViewController: UITableViewController {
                         
                         let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
                         self.navigationController?.pushViewController(guestViewController, animated: true)
+                    } else {
+                        let alertController = UIAlertController(title: "\(mention)", message: "用尽力洪荒之力，也没有发现该用户的存在！", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                            self.navigationController?.popViewController(animated: true)
+                        })
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated: true, completion: nil)
                     }
                 })
             }
