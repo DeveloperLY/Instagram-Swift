@@ -59,6 +59,12 @@ class LYTabBarController: UITabBarController {
         query(type: ["like"], image: UIImage(named: "likeIcon.png")!)
         query(type: ["follow"], image: UIImage(named: "followIcon.png")!)
         query(type: ["mention", "comment"], image: UIImage(named: "commentIcon.png")!)
+        
+        UIView.animateKeyframes(withDuration: 1, delay: 8, options: [], animations: {
+            icons.alpha = 0
+            corner.alpha = 0
+            dot.alpha = 0
+        }, completion: nil)
     }
     
     func query(type: [String], image: UIImage) -> Void {

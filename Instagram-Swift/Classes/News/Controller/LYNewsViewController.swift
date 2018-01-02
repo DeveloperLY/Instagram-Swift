@@ -59,12 +59,6 @@ class LYNewsViewController: UITableViewController {
                     (object as! AVObject).saveEventually()
                 }
                 
-                UIView.animate(withDuration: 1, animations: {
-                    icons.alpha = 0
-                    corner.alpha = 0
-                    dot.alpha = 0
-                })
-                
                 self.tableView.reloadData()
             }
         })
