@@ -28,7 +28,7 @@ class LYNewsCell: UITableViewCell {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[ava(30)]-10-[username]-7-[info]-10-[date]", options: [], metrics: nil, views: ["avatar": avatarImageView, "username": usernameButton, "info": infoLabel, "date": dateLabel]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[avatar(30)]-10-[username]-7-[info]-10-[date]", options: [], metrics: nil, views: ["avatar": avatarImageView, "username": usernameButton, "info": infoLabel, "date": dateLabel]))
         
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[avatar(30)]-10-|", options: [], metrics: nil, views: ["avatar": avatarImageView]))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[username(30)]", options: [], metrics: nil, views: ["username": usernameButton]))

@@ -1555,6 +1555,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="username"/>
+                                            <connections>
+                                                <action selector="usernameButtonDidClick:" destination="Hdm-ZO-tUo" eventType="touchUpInside" id="KPZ-rp-ZN4"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sug-0K-BPj">
                                             <rect key="frame" x="150" y="5" width="150" height="30"/>

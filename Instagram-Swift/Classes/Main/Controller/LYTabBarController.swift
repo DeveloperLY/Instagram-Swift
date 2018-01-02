@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import AVOSCloud
+
+// 关于icons的全局变量
+var icons = UIScrollView()
+var corner = UIImageView()
+var dot = UIView()
 
 class LYTabBarController: UITabBarController {
 
@@ -20,6 +26,71 @@ class LYTabBarController: UITabBarController {
         self.tabBar.barTintColor = UIColor(red: 37.0 / 255.0, green: 39.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
         
         self.tabBar.isTranslucent = false
+        
+        // 创建icon条
+        icons.frame = CGRect(x: self.view.frame.width / 5 * 3 + 10, y: self.view.frame.height - self.tabBar.frame.height * 2 - 3, width: 50, height: 35)
+        self.view.addSubview(icons)
+        
+        // 创建 corner
+        corner.frame = CGRect(x: icons.frame.origin.x, y: icons.frame.origin.y + icons.frame.height, width: 20, height: 14)
+        corner.center.x = icons.center.x
+        corner.image = UIImage(named: "corner.png")
+        corner.isHidden = true
+        self.view.addSubview(corner)
+        
+        // 创建 dot
+        dot.frame = CGRect(x: self.view.frame.width / 5 * 3, y: self.view.frame.height - 5, width: 7, height: 7)
+        dot.center.x = self.view.frame.width / 5 * 3 + (self.view.frame.width / 5) / 2
+        dot.backgroundColor = UIColor(red: 251 / 255, green: 103 / 255, blue: 29 / 255, alpha: 1.0)
+        dot.layer.cornerRadius = dot.frame.width / 2
+        dot.isHidden = true
+        self.view.addSubview(dot)
+        
+        // 显示所有通知Icon
+        query(type: ["like"], image: UIImage(named: "likeIcon.png")!)
+        query(type: ["follow"], image: UIImage(named: "followIcon.png")!)
+        query(type: ["mention", "comment"], image: UIImage(named: "commentIcon.png")!)
+    }
+    
+    func query(type: [String], image: UIImage) -> Void {
+        let query = AVQuery(className: "News")
+        query.whereKey("to", equalTo: AVUser.current()?.username ?? "")
+        query.whereKey("checked", equalTo: "no")
+        query.whereKey("type", containedIn: type)
+        
+        query.countObjectsInBackground({ (count: Int, error: Error?) in
+            if error == nil {
+                if count > 0 {
+                    self.placeIcon(image: image, text: String(count))
+                }
+            } else {
+                print(error?.localizedDescription ?? "加载通知信息失败")
+            }
+        })
+    }
+    
+    func placeIcon(image: UIImage, text: String) -> Void {
+        // 创建Icon
+        let view = UIImageView(frame: CGRect(x: icons.contentSize.width, y: 0, width: 50, height: 35))
+        view.image = image
+        icons.addSubview(view)
+        
+        // 创建Label
+        let label = UILabel(frame: CGRect(x: view.frame.width / 2, y: 0, width: view.frame.width / 2, height: view.frame.height))
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = .white
+        view.addSubview(label)
+        
+        // 调整icons视图的frame
+        icons.frame.size.width = icons.frame.width + view.frame.width - 4
+        icons.contentSize.width = icons.contentSize.width + view.frame.width - 4
+        icons.center.x = self.view.frame.width / 5 * 4 - (self.view.frame.width / 5) / 4
+        
+        // 显示隐藏的控件
+        corner.isHidden = false
+        dot.isHidden = false
     }
 
 }
