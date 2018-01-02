@@ -41,12 +41,6 @@ class LYHomeViewController: UICollectionViewController {
         
         // 监听数据刷新
         NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reload"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(uploaded(_:)), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Private Methods
@@ -109,6 +103,10 @@ class LYHomeViewController: UICollectionViewController {
         }
     }
     
+    @objc func reload(_ notification: Notification) -> Void {
+        collectionView?.reloadData()
+    }
+    
     // MARK: - Event
     // 单击帖子数后调用的方法
     @objc func postsTap(_ recognizer: UITapGestureRecognizer) -> Void {
@@ -132,14 +130,6 @@ class LYHomeViewController: UICollectionViewController {
         followersViewController.user = (AVUser.current()?.username)!
         followersViewController.show = "关 注"
         self.navigationController?.pushViewController(followersViewController, animated: true)
-    }
-    
-    @objc func reload(_ notification: Notification) -> Void {
-        collectionView?.reloadData()
-    }
-    
-    @objc func uploaded(_ notification: Notification) -> Void {
-        loadPosts()
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {

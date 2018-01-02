@@ -1,79 +1,166 @@
 //
-//  LYPostViewController.swift
+//  LYFeedViewController.swift
 //  Instagram-Swift
 //
-//  Created by LiuY on 2017/12/31.
-//  Copyright © 2017年 DeveloperLY. All rights reserved.
+//  Created by LiuY on 2018/1/2.
+//  Copyright © 2018年 DeveloperLY. All rights reserved.
 //
 
 import UIKit
 import AVOSCloud
 
-var postuuid = [String]()
-
-
-class LYPostViewController: UITableViewController {
+class LYFeedViewController: UITableViewController {
     
-    // 从服务器获取数据后写入到相应的数组中
-    var avatarArray = [AVFile]()
+    // UI Objects
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    var refresher = UIRefreshControl()
+    
+    // 存储云端数据的数组
     var usernameArray = [String]()
+    var avatarArray = [AVFile]()
     var dateArray = [Date]()
     var pictureArray = [AVFile]()
-    var puuidArray = [String]()
     var titleArray = [String]()
+    var puuidArray = [String]()
     
-
+    // 存储当前用户所关注的人
+    var followArray = [String]()
+    
+    // page size
+    var page: Int = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpNav()
+        self.navigationItem.title = "聚合"
         
-        // 实现右滑返回
-        let backSeipe = UISwipeGestureRecognizer(target: self, action: #selector(back(_:)))
-        backSeipe.direction = .right
-        self.view.addGestureRecognizer(backSeipe)
-        
-        // 动态Cell高度设置
+        // Cell 高度自动适应
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 550.0
         
-        loadData()
+        // 设置refresher
+        refresher.addTarget(self, action: #selector(loadPosts), for: .valueChanged)
+        self.view.addSubview(refresher)
         
-        // 监听通知
+        // 让indicator水平居中
+        indicator.center.x = tableView.center.x
+        
+        // 从云端载入帖子记录
+        loadPosts()
+        
+        // 监听数据刷新
+        NotificationCenter.default.addObserver(self, selector: #selector(uploaded(_:)), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: NSNotification.Name(rawValue: "liked"), object: nil)
     }
     
-    func loadData() -> Void {
-        let postQuery = AVQuery(className: "Posts")
-        postQuery.whereKey("puuid", equalTo: postuuid.last ?? "")
-        postQuery.findObjectsInBackground { (objects: [Any]?, error: Error?) in
-            // 清空数组
-            self.avatarArray.removeAll(keepingCapacity: false)
-            self.usernameArray.removeAll(keepingCapacity: false)
-            self.dateArray.removeAll(keepingCapacity: false)
-            self.pictureArray.removeAll(keepingCapacity: false)
-            self.puuidArray.removeAll(keepingCapacity: false)
-            self.titleArray.removeAll(keepingCapacity: false)
-            
-            for object in objects! {
-                self.avatarArray.append((object as AnyObject).value(forKey: "avatar") as! AVFile)
-                self.usernameArray.append((object as AnyObject).value(forKey: "username") as! String)
-                self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
-                self.pictureArray.append((object as AnyObject).value(forKey: "picture") as! AVFile)
-                self.puuidArray.append((object as AnyObject).value(forKey: "puuid") as! String)
-                self.titleArray.append((object as AnyObject).value(forKey: "title") as! String)
+    // 从云端载入帖子
+    @objc func loadPosts() {
+        AVUser.current()?.getFollowees { (objects: [Any]?, error: Error?) in
+            if error == nil {
+                // 清空数组
+                self.followArray.removeAll(keepingCapacity: false)
+                
+                for object in objects! {
+                    self.followArray.append(((object as AnyObject).username as? String)!)
+                }
+                
+                // 添加当前用户到followArray数组中
+                self.followArray.append((AVUser.current()?.username)!)
+                
+                let query = AVQuery(className: "Posts")
+                query.whereKey("username", containedIn: self.followArray)
+                query.limit = self.page
+                query.addDescendingOrder("createdAt")
+                query.findObjectsInBackground({ (objects:[Any]?, error:Error?) in
+                    if error == nil {
+                        // 清空数组
+                        self.usernameArray.removeAll(keepingCapacity: false)
+                        self.avatarArray.removeAll(keepingCapacity: false)
+                        self.dateArray.removeAll(keepingCapacity: false)
+                        self.pictureArray.removeAll(keepingCapacity: false)
+                        self.titleArray.removeAll(keepingCapacity: false)
+                        self.puuidArray.removeAll(keepingCapacity: false)
+                        
+                        for object in objects! {
+                            self.usernameArray.append((object as AnyObject).value(forKey: "username") as! String)
+                            self.avatarArray.append((object as AnyObject).value(forKey: "avatar") as! AVFile)
+                            self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
+                            self.pictureArray.append((object as AnyObject).value(forKey: "picture") as! AVFile)
+                            self.titleArray.append((object as AnyObject).value(forKey: "title") as! String)
+                            self.puuidArray.append((object as AnyObject).value(forKey: "puuid") as! String)
+                            
+                        }
+                        
+                        // reload tableView
+                        self.tableView.reloadData()
+                        self.refresher.endRefreshing()
+                        
+                    } else {
+                        print(error?.localizedDescription ?? "加载聚合帖子失败")
+                    }
+                })
             }
-            
-            self.tableView.reloadData()
         }
-        
     }
-
-    func setUpNav() -> Void {
-        // 返回按钮
-        self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(back(_:)))
-        self.navigationItem.leftBarButtonItem = backButton
+    
+    func loadMore() {
+        // 如果云端获取到的帖子数大于page数
+        if self.page <= puuidArray.count {
+            // 开始Indicator动画
+            indicator.startAnimating()
+            
+            // 将page数量+10
+            page += 10
+            
+            AVUser.current()?.getFollowees { (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    
+                    // 清空数组
+                    self.followArray.removeAll(keepingCapacity: false)
+                    
+                    for object in objects! {
+                        self.followArray.append(((object as AnyObject).username as? String)!)
+                    }
+                    
+                    // 添加当前用户到followArray数组中
+                    self.followArray.append((AVUser.current()?.username!)!)
+                    
+                    let query = AVQuery(className: "Posts")
+                    query.whereKey("username", containedIn: self.followArray)
+                    query.limit = self.page
+                    query.addDescendingOrder("createdAt")
+                    query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                        if error == nil {
+                            // 清空数组
+                            self.usernameArray.removeAll(keepingCapacity: false)
+                            self.avatarArray.removeAll(keepingCapacity: false)
+                            self.dateArray.removeAll(keepingCapacity: false)
+                            self.pictureArray.removeAll(keepingCapacity: false)
+                            self.titleArray.removeAll(keepingCapacity: false)
+                            self.puuidArray.removeAll(keepingCapacity: false)
+                            
+                            for object in objects! {
+                                self.usernameArray.append((object as AnyObject).value(forKey: "username") as! String)
+                                self.avatarArray.append((object as AnyObject).value(forKey: "avatar") as! AVFile)
+                                self.dateArray.append(((object as AnyObject).createdAt as? Date)!)
+                                self.pictureArray.append((object as AnyObject).value(forKey: "picture") as! AVFile)
+                                self.titleArray.append((object as AnyObject).value(forKey: "title") as! String)
+                                self.puuidArray.append((object as AnyObject).value(forKey: "puuid") as! String)
+                                
+                            }
+                            
+                            // reload tableView
+                            self.tableView.reloadData()
+                            self.indicator.stopAnimating()
+                            
+                        } else {
+                            print(error?.localizedDescription ?? "加载更多聚合帖子失败")
+                        }
+                    })
+                }
+            }
+        }
     }
     
     // 消息警告
@@ -84,18 +171,16 @@ class LYPostViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func back(_ sender: UIBarButtonItem) -> Void {
-        self.navigationController?.popViewController(animated: true)
-        
-        if !postuuid.isEmpty {
-            postuuid.removeLast()
-        }
+    // 在接收到uploaded通知后重新载入posts
+    @objc func uploaded(_ notification: Notification) -> Void {
+        loadPosts()
     }
     
     @objc func refresh(_ notification: Notification) -> Void {
         tableView.reloadData()
     }
     
+
     // MARK: - Event/Touch
     @IBAction func usernameButtonDidClick(_ sender: UIButton) {
         // 按钮 index
@@ -103,12 +188,21 @@ class LYPostViewController: UITableViewController {
         
         // 获取点击Cell
         let cell = tableView.cellForRow(at: indexPath) as! LYPostCell
+        
         if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
             self.navigationController?.pushViewController(homeViewController, animated: true)
         } else {
-            let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
-            self.navigationController?.pushViewController(guestViewController, animated: true)
+            let query = AVUser.query()
+            query.whereKey("username", equalTo: cell.usernameButton.titleLabel?.text ?? "")
+            query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if let object = objects?.last {
+                    guestArray.append(object as! AVUser)
+                    
+                    let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                    self.navigationController?.pushViewController(guestViewController, animated: true)
+                }
+            })
         }
         
     }
@@ -235,13 +329,12 @@ class LYPostViewController: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return usernameArray.count
-    }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return puuidArray.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 从表格视图的可复用队列中获取单元格对象
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! LYPostCell
@@ -363,6 +456,12 @@ class LYPostViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.height * 2 {
+            loadMore()
+        }
     }
 
 }
