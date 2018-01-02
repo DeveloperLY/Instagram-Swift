@@ -11,6 +11,7 @@
 		0D3BFC49CA47452C6712AC2E /* Pods_Instagram_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50BB54F3664C88FD256ABA8C /* Pods_Instagram_SwiftUITests.framework */; };
 		86D88FE3A240B8C5953399E2 /* Pods_Instagram_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80BE5C916695481961C4B62D /* Pods_Instagram_Swift.framework */; };
 		CD13A18A1FFB73D8006911BC /* LYFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A1891FFB73D8006911BC /* LYFeedViewController.swift */; };
+		CD13A18E1FFB86A3006911BC /* LYUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A18D1FFB86A3006911BC /* LYUsersViewController.swift */; };
 		CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05621FF51BD100C1420C /* ConstConfig.swift */; };
 		CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05691FF5333100C1420C /* LYLoginViewController.swift */; };
 		CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */; };
@@ -76,6 +77,7 @@
 		80BE5C916695481961C4B62D /* Pods_Instagram_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8538BA2ED59A5D359C4F11D2 /* Pods_Instagram_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD13A1891FFB73D8006911BC /* LYFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFeedViewController.swift; sourceTree = "<group>"; };
+		CD13A18D1FFB86A3006911BC /* LYUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYUsersViewController.swift; sourceTree = "<group>"; };
 		CD1B05621FF51BD100C1420C /* ConstConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstConfig.swift; sourceTree = "<group>"; };
 		CD1B05691FF5333100C1420C /* LYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYLoginViewController.swift; sourceTree = "<group>"; };
 		CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYRegisterViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +182,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		CD13A18B1FFB8675006911BC /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				CD13A18C1FFB8682006911BC /* Controller */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		CD13A18C1FFB8682006911BC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD13A18D1FFB86A3006911BC /* LYUsersViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		CD1B05611FF51B9300C1420C /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +210,7 @@
 		CD1B05641FF531DE00C1420C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD13A18B1FFB8675006911BC /* Users */,
 				CD13A1871FFB73A2006911BC /* Feed */,
 				CDC57CFC1FF80E5F00375426 /* Post */,
 				CDC57CF41FF76C3E00375426 /* Publish */,
@@ -775,6 +794,7 @@
 				CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */,
 				CDC57CF71FF76CB100375426 /* LYUploadViewController.swift in Sources */,
 				CD835B2C1FF6478600BA0DA5 /* LYFollowersController.swift in Sources */,
+				CD13A18E1FFB86A3006911BC /* LYUsersViewController.swift in Sources */,
 				CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */,
 				CDC57CFB1FF76FF800375426 /* LYConst.swift in Sources */,
 				CD9D9B081FF8BDEF00376D99 /* LYCommentViewController.swift in Sources */,

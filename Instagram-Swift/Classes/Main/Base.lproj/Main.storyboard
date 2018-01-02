@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1881" y="-1507"/>
+            <point key="canvasLocation" x="-2556" y="-2511"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="vRr-9i-Os5">
@@ -293,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qb-DV-z0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1089" y="-1159"/>
+            <point key="canvasLocation" x="-1764" y="-2163"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="r7m-ib-UPU">
@@ -306,6 +306,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="1bF-DK-AXp" kind="relationship" relationship="viewControllers" id="kUq-1k-dXu"/>
+                        <segue destination="13z-dr-lee" kind="relationship" relationship="viewControllers" id="wM8-B4-1ls"/>
                         <segue destination="mrG-nM-gOe" kind="relationship" relationship="viewControllers" id="FnV-SS-gUd"/>
                         <segue destination="1iW-Z9-NQc" kind="relationship" relationship="viewControllers" id="xBq-bh-d8W"/>
                     </connections>
@@ -650,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1j-oE-I6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1089" y="-1810"/>
+            <point key="canvasLocation" x="-1764" y="-2814"/>
         </scene>
         <!--我的-->
         <scene sceneID="2TV-8q-SVw">
@@ -1442,10 +1443,77 @@
             </objects>
             <point key="canvasLocation" x="-1753" y="-409"/>
         </scene>
+        <!--Users View Controller-->
+        <scene sceneID="MGL-Sj-GIk">
+            <objects>
+                <tableViewController storyboardIdentifier="UsersViewController" id="pOf-fO-dEb" customClass="LYUsersViewController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CSe-4W-Ny9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="UsersCell" rowHeight="80" id="YdA-8H-z3P" customClass="LYFollowersCell" customModule="Instagram_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YdA-8H-z3P" id="L23-og-vqP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pp.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="UOk-0i-tSz">
+                                            <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="BqB-qV-E1B"/>
+                                                <constraint firstAttribute="width" constant="60" id="umB-3L-lf2"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K1-9M-YYt">
+                                            <rect key="frame" x="80" y="29" width="185" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im9-dw-SDK">
+                                            <rect key="frame" x="285" y="25" width="80" height="30"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="Crg-gf-CHa"/>
+                                                <constraint firstAttribute="height" constant="30" id="tQW-R0-mzL"/>
+                                            </constraints>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="im9-dw-SDK" secondAttribute="trailing" constant="10" id="4Xd-6A-WQ1"/>
+                                        <constraint firstItem="1K1-9M-YYt" firstAttribute="centerY" secondItem="UOk-0i-tSz" secondAttribute="centerY" id="DC1-Fl-IP7"/>
+                                        <constraint firstItem="im9-dw-SDK" firstAttribute="centerY" secondItem="1K1-9M-YYt" secondAttribute="centerY" id="IJA-Gz-UyR"/>
+                                        <constraint firstAttribute="bottom" secondItem="UOk-0i-tSz" secondAttribute="bottom" constant="10" id="MRc-Wk-m72"/>
+                                        <constraint firstItem="UOk-0i-tSz" firstAttribute="leading" secondItem="L23-og-vqP" secondAttribute="leading" constant="10" id="MlD-wH-MgT"/>
+                                        <constraint firstItem="im9-dw-SDK" firstAttribute="leading" secondItem="1K1-9M-YYt" secondAttribute="trailing" constant="20" id="P7x-ML-Rmt"/>
+                                        <constraint firstItem="1K1-9M-YYt" firstAttribute="leading" secondItem="UOk-0i-tSz" secondAttribute="trailing" constant="10" id="WwL-R7-8cL"/>
+                                        <constraint firstItem="UOk-0i-tSz" firstAttribute="top" secondItem="L23-og-vqP" secondAttribute="top" constant="10" id="eyv-O8-shr"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="UOk-0i-tSz" id="0Mf-j9-npc"/>
+                                    <outlet property="followButton" destination="im9-dw-SDK" id="dpM-Yo-NHa"/>
+                                    <outlet property="usernameLabel" destination="1K1-9M-YYt" id="ubo-mM-px1"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pOf-fO-dEb" id="gFb-nd-GwY"/>
+                            <outlet property="delegate" destination="pOf-fO-dEb" id="82j-72-4MG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="4aV-b8-6ZL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OeF-uG-eoU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1754.4000000000001" y="-1093.4032983508246"/>
+        </scene>
         <!--聚合-->
         <scene sceneID="XT7-oh-jMl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1bF-DK-AXp" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1bF-DK-AXp" customClass="LYNavigationController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="聚合" image="feed" id="ddm-ya-K33"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oV5-V0-90e">
@@ -1461,6 +1529,25 @@
             </objects>
             <point key="canvasLocation" x="-2519" y="-409"/>
         </scene>
+        <!--搜索-->
+        <scene sceneID="R2C-yC-d73">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="13z-dr-lee" customClass="LYNavigationController" customModule="Instagram_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="搜索" image="users" id="SnX-qk-fJj"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Og6-ca-lEG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pOf-fO-dEb" kind="relationship" relationship="rootViewController" id="JQ7-2F-oeC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kk5-Wb-l9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2519" y="-1093"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg.jpg" width="640" height="1136"/>
@@ -1474,5 +1561,6 @@
         <image name="pp.jpg" width="96" height="96"/>
         <image name="unlike.png" width="270" height="270"/>
         <image name="upload" width="22" height="22"/>
+        <image name="users" width="25" height="25"/>
     </resources>
 </document>
