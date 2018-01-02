@@ -12,6 +12,8 @@
 		86D88FE3A240B8C5953399E2 /* Pods_Instagram_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80BE5C916695481961C4B62D /* Pods_Instagram_Swift.framework */; };
 		CD13A18A1FFB73D8006911BC /* LYFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A1891FFB73D8006911BC /* LYFeedViewController.swift */; };
 		CD13A18E1FFB86A3006911BC /* LYUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A18D1FFB86A3006911BC /* LYUsersViewController.swift */; };
+		CD13A1921FFBA98C006911BC /* LYNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A1911FFBA98C006911BC /* LYNewsViewController.swift */; };
+		CD13A1951FFBA9F8006911BC /* LYNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD13A1941FFBA9F8006911BC /* LYNewsCell.swift */; };
 		CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05621FF51BD100C1420C /* ConstConfig.swift */; };
 		CD1B056A1FF5333100C1420C /* LYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B05691FF5333100C1420C /* LYLoginViewController.swift */; };
 		CD1B056C1FF5333D00C1420C /* LYRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */; };
@@ -78,6 +80,8 @@
 		8538BA2ED59A5D359C4F11D2 /* Pods_Instagram_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD13A1891FFB73D8006911BC /* LYFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFeedViewController.swift; sourceTree = "<group>"; };
 		CD13A18D1FFB86A3006911BC /* LYUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYUsersViewController.swift; sourceTree = "<group>"; };
+		CD13A1911FFBA98C006911BC /* LYNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNewsViewController.swift; sourceTree = "<group>"; };
+		CD13A1941FFBA9F8006911BC /* LYNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNewsCell.swift; sourceTree = "<group>"; };
 		CD1B05621FF51BD100C1420C /* ConstConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstConfig.swift; sourceTree = "<group>"; };
 		CD1B05691FF5333100C1420C /* LYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYLoginViewController.swift; sourceTree = "<group>"; };
 		CD1B056B1FF5333D00C1420C /* LYRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYRegisterViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,31 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		CD13A18F1FFBA967006911BC /* News */ = {
+			isa = PBXGroup;
+			children = (
+				CD13A1931FFBA9E2006911BC /* View */,
+				CD13A1901FFBA975006911BC /* Controller */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		CD13A1901FFBA975006911BC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD13A1911FFBA98C006911BC /* LYNewsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CD13A1931FFBA9E2006911BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD13A1941FFBA9F8006911BC /* LYNewsCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CD1B05611FF51B9300C1420C /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +239,7 @@
 		CD1B05641FF531DE00C1420C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD13A18F1FFBA967006911BC /* News */,
 				CD13A18B1FFB8675006911BC /* Users */,
 				CD13A1871FFB73A2006911BC /* Feed */,
 				CDC57CFC1FF80E5F00375426 /* Post */,
@@ -805,6 +835,7 @@
 				CD1B056E1FF5336100C1420C /* LYResetPasswordViewController.swift in Sources */,
 				CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */,
 				CD835B201FF6124C00BA0DA5 /* LYHomePictureCell.swift in Sources */,
+				CD13A1921FFBA98C006911BC /* LYNewsViewController.swift in Sources */,
 				CDC57CFF1FF80E9A00375426 /* LYPostViewController.swift in Sources */,
 				CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */,
 				CD9D9B0A1FF8BE2600376D99 /* LYCommentCell.swift in Sources */,
@@ -814,6 +845,7 @@
 				CD13A18A1FFB73D8006911BC /* LYFeedViewController.swift in Sources */,
 				CD1B05631FF51BD100C1420C /* ConstConfig.swift in Sources */,
 				CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */,
+				CD13A1951FFBA9F8006911BC /* LYNewsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

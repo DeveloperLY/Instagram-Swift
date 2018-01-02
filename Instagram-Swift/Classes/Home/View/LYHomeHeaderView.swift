@@ -49,6 +49,18 @@ class LYHomeHeaderView: UICollectionReusableView {
                 if isSuccess {
                     self.followButton.setTitle("√ 已关注", for: .normal)
                     self.followButton.backgroundColor = .green
+                    
+                    // 发送关注通知
+                    let newsObject = AVObject(className: "News")
+                    newsObject["by"] = AVUser.current()?.username
+                    newsObject["avatar"] = AVUser.current()?.object(forKey: "avatar") as! AVFile
+                    newsObject["to"] = guestArray.last?.username
+                    newsObject["owner"] = ""
+                    newsObject["puuid"] = ""
+                    newsObject["type"] = "follow"
+                    newsObject["checked"] = "no"
+                    newsObject.saveEventually()
+                    
                 } else {
                     print(error?.localizedDescription ?? "follow 失败...")
                 }
@@ -62,6 +74,20 @@ class LYHomeHeaderView: UICollectionReusableView {
                 if isSuccess {
                     self.followButton.setTitle("关 注", for: .normal)
                     self.followButton.backgroundColor = .lightGray
+                    
+                    // 删除关注通知
+                    let newsQuery = AVQuery(className: "News")
+                    newsQuery.whereKey("by", equalTo: AVUser.current()?.username ?? "")
+                    newsQuery.whereKey("to", equalTo: guestArray.last?.username ?? "")
+                    newsQuery.whereKey("type", equalTo: "follow")
+                    newsQuery.findObjectsInBackground({ (objects:[Any]?, error:Error?) in
+                        if error == nil {
+                            for object in objects! {
+                                (object as AnyObject).deleteEventually()
+                            }
+                        }
+                    })
+                    
                 } else {
                     print(error?.localizedDescription ?? "unfollow 失败...")
                 }

@@ -284,6 +284,41 @@ class LYCommentViewController: UIViewController {
             }
         }
         
+        // 当遇到 @mention 发通知
+        var mentionCreated = Bool()
+        
+        for var word in words {
+            if word.hasPrefix("@") {
+                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                word = word.trimmingCharacters(in: CharacterSet.symbols)
+                
+                let newsObject = AVObject(className: "News")
+                newsObject["by"] = AVUser.current()?.username
+                newsObject["avatar"] = AVUser.current()?.object(forKey: "avatar") as! AVFile
+                newsObject["to"] = word
+                newsObject["owner"] = commentowner.last
+                newsObject["puuid"] = commentuuid.last
+                newsObject["type"] = "mention"
+                newsObject["checked"] = "no"
+                newsObject.saveEventually()
+                
+                mentionCreated = true
+            }
+        }
+        
+        // 发送评论时候的通知
+        if commentowner.last != AVUser.current()?.username && mentionCreated == false {
+            let newsObject = AVObject(className: "News")
+            newsObject["by"] = AVUser.current()?.username
+            newsObject["avatar"] = AVUser.current()?.object(forKey: "avatar") as! AVFile
+            newsObject["to"] = commentowner.last
+            newsObject["owner"] = commentowner.last
+            newsObject["puuid"] = commentuuid.last
+            newsObject["type"] = "comment"
+            newsObject["checked"] = "no"
+            newsObject.saveEventually()
+        }
+        
         // scroll to bottom
         self.tableView.scrollToRow(at: IndexPath(item: commentArray.count - 1, section: 0), at: .bottom, animated: false)
         
@@ -484,6 +519,20 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
             hashtagQuery.whereKey("by", equalTo: cell.usernameButton.titleLabel?.text ?? "")
             hashtagQuery.whereKey("comment", equalTo: cell.commentLabel.text ?? "")
             hashtagQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if error == nil {
+                    for object in objects! {
+                        (object as AnyObject).deleteEventually()
+                    }
+                }
+            })
+            
+            // 删除评论和@mention的消息通知
+            let newsQuery = AVQuery(className: "News")
+            newsQuery.whereKey("by", equalTo: cell.usernameButton.titleLabel!.text ?? "")
+            newsQuery.whereKey("to", equalTo: commentowner.last!)
+            newsQuery.whereKey("puuid", equalTo: commentuuid.last!)
+            newsQuery.whereKey("type", containedIn: ["mention", "comment"])
+            newsQuery.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
                 if error == nil {
                     for object in objects! {
                         (object as AnyObject).deleteEventually()
