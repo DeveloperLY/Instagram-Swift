@@ -8,7 +8,6 @@
 
 import UIKit
 import AVOSCloud
-import AVOSCloudCrashReporting
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,14 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVAnalytics.trackAppOpened(launchOptions: launchOptions)
         
         login()
-        
-//        AVUser.current()?.follow("5a46073b0b6160004388afe6", andCallback: { (isSuccess, error) in
-//            if isSuccess {
-//                print("添加关注者成功")
-//            } else {
-//                print("失败")
-//            }
-//        })
         
         window?.backgroundColor = .white
         
