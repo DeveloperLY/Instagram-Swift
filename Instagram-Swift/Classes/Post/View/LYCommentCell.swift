@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KILabel
+import ActiveLabel
 
 class LYCommentCell: UITableViewCell {
     
@@ -15,7 +15,7 @@ class LYCommentCell: UITableViewCell {
     
     @IBOutlet weak var usernameButton: UIButton!
     
-    @IBOutlet weak var commentLabel: KILabel!
+    @IBOutlet weak var commentLabel: ActiveLabel!
     
     @IBOutlet weak var dateLabel: UILabel!
     

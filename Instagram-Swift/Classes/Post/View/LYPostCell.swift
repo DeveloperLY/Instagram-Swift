@@ -8,7 +8,7 @@
 
 import UIKit
 import AVOSCloud
-import KILabel
+import ActiveLabel
 
 class LYPostCell: UITableViewCell {
     
@@ -23,7 +23,7 @@ class LYPostCell: UITableViewCell {
     
     
     @IBOutlet weak var likeLabel: UILabel!
-    @IBOutlet weak var titleLabel: KILabel!
+    @IBOutlet weak var titleLabel: ActiveLabel!
     @IBOutlet weak var puuidLabel: UILabel!
     
     

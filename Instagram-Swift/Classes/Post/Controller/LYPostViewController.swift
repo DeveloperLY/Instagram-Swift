@@ -323,9 +323,7 @@ class LYPostViewController: UITableViewController {
         cell.moreButton.layer.setValue(indexPath, forKey: "index")
         
         // @mentions is tapped
-        cell.titleLabel.userHandleLinkTapHandler = { label, handle, rang in
-            var mention = handle
-            mention = String(mention.dropFirst())
+        cell.titleLabel.handleMentionTap { (mention) in
             
             if mention == AVUser.current()?.username {
                 let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
@@ -352,14 +350,12 @@ class LYPostViewController: UITableViewController {
         }
         
         // #hashtag is tapped
-        cell.titleLabel.hashtagLinkTapHandler = { label, handle, rang in
-            var mention = handle
-            mention = String(mention.dropFirst())
-            hashtags.append(mention)
+        cell.titleLabel.handleHashtagTap { (hashtag) in
+
+            hashtags.append(hashtag)
             
             let hashtagsViewController = self.storyboard?.instantiateViewController(withIdentifier: "HashtagsViewController") as! LYHashtagsViewController
             self.navigationController?.pushViewController(hashtagsViewController, animated: true)
-            
         }
         
         return cell
