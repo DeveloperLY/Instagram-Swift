@@ -131,7 +131,8 @@ class LYUsersViewController: UITableViewController {
         layout.scrollDirection = .vertical
         
         // 定义滚动视图在视图中的位置
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.tabBarController!.tabBar.frame.height - self.navigationController!.navigationBar.frame.height - 20)
+        let navigationBarHeight : CGFloat = UIScreen.main.bounds.height == 812 ? self.navigationController!.navigationBar.frame.height + 24 : self.navigationController!.navigationBar.frame.height
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.tabBarController!.tabBar.frame.height - navigationBarHeight - 20)
         
         // 实例化滚动视图
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)

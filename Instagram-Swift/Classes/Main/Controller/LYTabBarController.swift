@@ -30,11 +30,11 @@ class LYTabBarController: UITabBarController {
         // 自定义标签按钮
         let itemWidth = self.view.frame.width / 5
         let itemHeight = self.tabBar.frame.height
-        let button = UIButton(frame: CGRect(x: itemWidth * 2, y: self.view.frame.height - itemHeight, width: itemWidth - 10, height: itemHeight))
+        let button = UIButton(frame: CGRect(x: itemWidth * 2, y: 0, width: itemWidth - 10, height: itemHeight))
         button.setBackgroundImage(UIImage(named:"upload.png"), for: .normal)
         button.adjustsImageWhenHighlighted = false
         button.addTarget(self, action: #selector(uploaded), for: .touchUpInside)
-        self.view.addSubview(button)
+        self.tabBar.addSubview(button)
         
         // 创建icon条
         icons.frame = CGRect(x: self.view.frame.width / 5 * 3 + 10, y: self.view.frame.height - self.tabBar.frame.height * 2 - 3, width: 50, height: 35)
