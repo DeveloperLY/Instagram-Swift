@@ -107,8 +107,16 @@ class LYPostViewController: UITableViewController {
             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
             self.navigationController?.pushViewController(homeViewController, animated: true)
         } else {
-            let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
-            self.navigationController?.pushViewController(guestViewController, animated: true)
+            let query = AVUser.query()
+            query.whereKey("username", equalTo: cell.usernameButton.titleLabel?.text ?? "")
+            query.findObjectsInBackground({ (objects: [Any]?, error: Error?) in
+                if let object = objects?.last {
+                    guestArray.append(object as! AVUser)
+                    
+                    let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                    self.navigationController?.pushViewController(guestViewController, animated: true)
+                }
+            })
         }
         
     }
