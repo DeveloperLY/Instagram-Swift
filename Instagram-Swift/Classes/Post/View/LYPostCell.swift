@@ -21,7 +21,6 @@ class LYPostCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var moreButton: UIButton!
     
-    
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var titleLabel: ActiveLabel!
     @IBOutlet weak var puuidLabel: UILabel!
@@ -43,47 +42,60 @@ class LYPostCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         puuidLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let pictureWidth = LYScreenW - 20
+        avatarImageView.snp.makeConstraints { (make) in
+            make.left.top.equalTo(self.contentView).offset(10.0)
+            make.height.width.equalTo(30.0)
+        }
         
-        // 约束
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[avatar(30)]-10-[picture(\(pictureWidth))]-5-[like(30)]", options: [], metrics: nil, views: ["avatar": avatarImageView, "picture": pictureImageView, "like": likeButton]))
+        usernameButton.snp.makeConstraints { (make) in
+            make.left.equalTo(self.avatarImageView.snp.right).offset(10.0)
+            make.right.lessThanOrEqualTo(self.contentView.snp.centerX)
+            make.centerY.equalTo(self.avatarImageView)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[username]", options: [], metrics: nil, views: ["username": usernameButton]))
+        dateLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.usernameButton)
+            make.right.equalTo(self.contentView).offset(-10.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[picture]-5-[comment(30)]", options: [], metrics: nil, views: ["picture": pictureImageView, "comment": commentButton]))
+        pictureImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.avatarImageView.snp.bottom).offset(10.0)
+            make.left.right.equalTo(self.contentView)
+            make.height.equalTo(LYScreenW - 20)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-15-[date]", options: [], metrics: nil, views: ["date": dateLabel]))
+        likeButton.snp.makeConstraints { (make) in
+            make.left.equalTo(self.contentView).offset(15.0)
+            make.top.equalTo(self.pictureImageView.snp.bottom).offset(5.0)
+            make.width.height.equalTo(30.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[like]-5-[title]-5-|", options: [], metrics: nil, views: ["like": likeButton, "title": titleLabel]))
+        likeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.likeButton.snp.right).offset(10.0)
+            make.top.equalTo(self.pictureImageView.snp.bottom).offset(10)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[picture]-5-[more(30)]", options: [], metrics: nil, views: ["picture": pictureImageView, "more": moreButton]))
+        commentButton.snp.makeConstraints { (make) in
+            make.centerY.width.height.equalTo(self.likeButton)
+            make.left.equalTo(self.likeLabel.snp.right).offset(20.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[picture]-10-[likes]", options: [], metrics: nil, views: ["picture": pictureImageView, "likes": likeLabel]))
+        moreButton.snp.makeConstraints { (make) in
+            make.centerY.width.height.equalTo(self.commentButton)
+            make.right.equalTo(self.contentView).offset(-15.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-10-[avatar(30)]-10-[username]", options: [], metrics: nil, views: ["avatar": avatarImageView, "username": usernameButton]))
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.contentView).offset(15.0)
+            make.top.equalTo(self.likeButton.snp.bottom).offset(5.0)
+            make.right.equalTo(self.contentView).offset(-15.0)
+            make.bottom.equalTo(self.contentView).offset(-5.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-0-[picture]-0-|", options: [], metrics: nil, views: ["picture": pictureImageView]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[like(30)]-10-[likes]-20-[comment(30)]", options: [], metrics: nil, views: ["like": likeButton, "likes": likeLabel, "comment": commentButton]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:[more(30)]-15-|", options: [], metrics: nil, views: ["more": moreButton]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[title]-15-|", options: [], metrics: nil, views: ["title": titleLabel]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|[date]-10-|", options: [], metrics: nil, views: ["date": dateLabel]))
+        // 可以不设置
+        puuidLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(self.pictureImageView)
+        }
         
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.clipsToBounds = true

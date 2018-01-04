@@ -28,12 +28,29 @@ class LYNewsCell: UITableViewCell {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[avatar(30)]-10-[username]-7-[info]-10-[date]", options: [], metrics: nil, views: ["avatar": avatarImageView, "username": usernameButton, "info": infoLabel, "date": dateLabel]))
+        avatarImageView.snp.makeConstraints { (make) in
+            make.left.top.equalTo(self.contentView).offset(10.0)
+            make.bottom.equalTo(self.contentView).offset(-10.0)
+            make.width.height.equalTo(30.0)
+        }
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[avatar(30)]-10-|", options: [], metrics: nil, views: ["avatar": avatarImageView]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[username(30)]", options: [], metrics: nil, views: ["username": usernameButton]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[info(30)]", options: [], metrics: nil, views: ["info": infoLabel]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[date(30)]", options: [], metrics: nil, views: ["date": dateLabel]))
+        usernameButton.snp.makeConstraints { (make) in
+            make.left.equalTo(self.avatarImageView.snp.right).offset(10.0)
+            make.centerY.equalTo(self.avatarImageView)
+            make.height.equalTo(30.0)
+        }
+        
+        infoLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.usernameButton)
+            make.left.equalTo(self.usernameButton.snp.right).offset(7.0)
+            make.height.equalTo(30.0)
+        }
+        
+        dateLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.infoLabel.snp.right).offset(10.0)
+            make.centerY.equalTo(self.infoLabel)
+            make.height.equalTo(30.0)
+        }
         
         // 头像变圆
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2

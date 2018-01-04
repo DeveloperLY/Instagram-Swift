@@ -30,29 +30,28 @@ class LYCommentCell: UITableViewCell {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         // 添加约束
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-5-[username]-(-2)-[comment]-5-|",
-            options: [], metrics: nil, views: ["username": usernameButton, "comment": commentLabel]))
+        avatarImageView.snp.makeConstraints { (make) in
+            make.left.top.equalTo(self.contentView).offset(10.0)
+            make.width.height.equalTo(40.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-15-[date]",
-            options: [], metrics: nil, views: ["date": dateLabel]))
+        usernameButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(5.0)
+            make.left.equalTo(self.avatarImageView.snp.right).offset(13.0)
+            make.right.lessThanOrEqualTo(self.contentView.snp.centerX)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[avatar(40)]",
-            options: [], metrics: nil, views: ["avatar": avatarImageView]))
+        commentLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.usernameButton.snp.bottom).offset(-2.0)
+            make.left.equalTo(self.usernameButton)
+            make.right.equalTo(self.contentView).offset(-20.0)
+            make.bottom.equalTo(self.contentView).offset(-5.0)
+        }
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-10-[avatar(40)]-13-[comment]-20-|",
-            options: [], metrics: nil, views: ["avatar": avatarImageView, "comment": commentLabel]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:[avatar]-13-[username]",
-            options: [], metrics: nil, views: ["avatar": avatarImageView, "username": usernameButton]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:[date]-10-|",
-            options: [], metrics: nil, views: ["date": dateLabel]))
+        dateLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(15.0)
+            make.right.equalTo(self.contentView).offset(-10)
+        }
         
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.clipsToBounds = true
