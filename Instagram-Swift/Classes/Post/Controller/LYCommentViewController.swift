@@ -8,6 +8,7 @@
 
 import UIKit
 import AVOSCloud
+import IQKeyboardManagerSwift
 
 var commentuuid = [String]()
 var commentowner = [String]()
@@ -71,6 +72,8 @@ class LYCommentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = false
+        
         // 隐藏底部TabBar
         self.tabBarController?.tabBar.isHidden = true
         
@@ -80,6 +83,8 @@ class LYCommentViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         
         // 显示底部TabBar
         self.tabBarController?.tabBar.isHidden = false
