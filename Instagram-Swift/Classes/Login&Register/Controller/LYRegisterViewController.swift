@@ -86,6 +86,16 @@ class LYRegisterViewController: UIViewController {
             return
         }
         
+        if !LYUitils.validateEmail(email: emailTextField.text!) {
+            LYProgressHUD.showError("请输入正确的邮箱")
+            return
+        }
+        
+        if !LYUitils.validateWeb(web: webTextField.text!) {
+            LYProgressHUD.showError("请输入正确的网址")
+            return
+        }
+        
         // 将用户输入的信息提交到服务器
         let user = AVUser()
         user.username = usernameTextField.text
@@ -101,11 +111,12 @@ class LYRegisterViewController: UIViewController {
         let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
         user["avatar"] = avatarFile
         
+        LYProgressHUD.show("正在注册...")
         // 提交数据
         user.signUpInBackground { (isSuccess, error) in
             if isSuccess {
-                print("用户注册成功！")
-            
+                LYProgressHUD.showSuccess("注册成功！")
+                
                 AVUser.logInWithUsername(inBackground: user.username!, password: user.password!, block: { (user: AVUser?, error: Error?) in
                     if let user = user {
                         // 记住登录的用户
@@ -118,6 +129,7 @@ class LYRegisterViewController: UIViewController {
                 })
                 
             } else {
+                LYProgressHUD.showError(error?.localizedDescription ?? "注册失败！")
                 print(error?.localizedDescription ?? "用户注册失败！")
             }
         }

@@ -133,19 +133,27 @@ class LYHomeViewController: UICollectionViewController {
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        // 退出用户登录
-        AVUser.logOut()
+        let alertController = UIAlertController(title: "温馨提醒", message: "你确定要退出登录吗？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "退出", style: .destructive) { (alerAction) in
+            // 退出用户登录
+            AVUser.logOut()
+            
+            // 移除本地登录信息
+            UserDefaults.standard.removeObject(forKey: "username")
+            UserDefaults.standard.synchronize()
+            
+            // 进入登录控制器
+            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LYLoginViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = loginViewController
+        }
+        alertController.addAction(okAction)
         
-        // 移除本地登录信息
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.synchronize()
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         
-        // 进入登录控制器
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LYLoginViewController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = loginViewController
+        self.present(alertController, animated: true, completion: nil)
     }
-    
 
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

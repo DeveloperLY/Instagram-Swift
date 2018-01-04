@@ -39,9 +39,11 @@ class LYLoginViewController: UIViewController {
             return
         }
         
+        LYProgressHUD.show("正在登录...")
         // 用户登录
         AVUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error == nil {
+                LYProgressHUD.showSuccess("登录成功！")
                 // 登录成功
                 UserDefaults.standard.set(user!.username, forKey: "username")
                 UserDefaults.standard.synchronize()
@@ -49,6 +51,7 @@ class LYLoginViewController: UIViewController {
                 let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.login()
             } else {
+                LYProgressHUD.showError(error?.localizedDescription ?? "登录失败！")
                 print(error?.localizedDescription ?? "用户登录失败！")
             }
         }

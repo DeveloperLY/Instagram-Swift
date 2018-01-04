@@ -153,8 +153,10 @@ class LYUploadViewController: UIViewController {
         }
         
         // 提交服务器
+        LYProgressHUD.show("正在发布中...")
         object.saveInBackground { (success: Bool, error: Error?) in
             if error == nil {
+                LYProgressHUD.showSuccess("发布成功！")
                 // 发送通知
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "uploaded"), object: nil)
                 
@@ -163,6 +165,9 @@ class LYUploadViewController: UIViewController {
                 
                 // reset
                 self.viewDidLoad()
+            } else {
+                print(error?.localizedDescription ?? "帖子发布失败！")
+                LYProgressHUD.showError("发布失败！")
             }
         }
     }

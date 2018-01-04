@@ -3,12 +3,14 @@ PODS:
   - AVOSCloud (7.3.2)
   - IQKeyboardManagerSwift (5.0.7)
   - SnapKit (4.0.0)
+  - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
   - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift.git`, tag `0.8.0`)
   - AVOSCloud
   - IQKeyboardManagerSwift (~> 5.0.7)
   - SnapKit (~> 4.0.0)
+  - SVProgressHUD (~> 2.2.2)
 
 EXTERNAL SOURCES:
   ActiveLabel:
@@ -25,7 +27,8 @@ SPEC CHECKSUMS:
   AVOSCloud: 8a18125408bac1fc73c19ceb897db4ec4e0e6044
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: 59b2c00b38e22380d45def77934813277498a69d
+PODFILE CHECKSUM: a687fe322e9d64ae9179de4f1242607f7e1e7b53
 
 COCOAPODS: 1.3.1

@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         IQKeyboardManager.sharedManager().toolbarManageBehaviour = .byPosition
         
+        // HUD
+        LYProgressHUD.enable()
+        
         login()
         
         window?.backgroundColor = .white

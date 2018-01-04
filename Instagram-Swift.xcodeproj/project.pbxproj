@@ -42,6 +42,8 @@
 		CD835B2F1FF647B000BA0DA5 /* LYFollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */; };
 		CD835B331FF65E0000BA0DA5 /* LYGuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */; };
 		CD835B351FF68F8500BA0DA5 /* LYEditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */; };
+		CD8B4D311FFE999C00CF235A /* LYUitils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B4D301FFE999C00CF235A /* LYUitils.swift */; };
+		CD8B4D331FFE9DB400CF235A /* LYProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B4D321FFE9DB400CF235A /* LYProgressHUD.swift */; };
 		CD9D9B081FF8BDEF00376D99 /* LYCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D9B071FF8BDEF00376D99 /* LYCommentViewController.swift */; };
 		CD9D9B0A1FF8BE2600376D99 /* LYCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D9B091FF8BE2600376D99 /* LYCommentCell.swift */; };
 		CDC57CF71FF76CB100375426 /* LYUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC57CF61FF76CB100375426 /* LYUploadViewController.swift */; };
@@ -122,6 +124,8 @@
 		CD835B2E1FF647B000BA0DA5 /* LYFollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYFollowersCell.swift; sourceTree = "<group>"; };
 		CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYGuestViewController.swift; sourceTree = "<group>"; };
 		CD835B341FF68F8500BA0DA5 /* LYEditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYEditInfoViewController.swift; sourceTree = "<group>"; };
+		CD8B4D301FFE999C00CF235A /* LYUitils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYUitils.swift; sourceTree = "<group>"; };
+		CD8B4D321FFE9DB400CF235A /* LYProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYProgressHUD.swift; sourceTree = "<group>"; };
 		CD9D9B071FF8BDEF00376D99 /* LYCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYCommentViewController.swift; sourceTree = "<group>"; };
 		CD9D9B091FF8BE2600376D99 /* LYCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYCommentCell.swift; sourceTree = "<group>"; };
 		CDC57CF61FF76CB100375426 /* LYUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYUploadViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 		CD1B05641FF531DE00C1420C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD8B4D2A1FFE968A00CF235A /* Other */,
 				CD13A18F1FFBA967006911BC /* News */,
 				CD13A18B1FFB8675006911BC /* Users */,
 				CD13A1871FFB73A2006911BC /* Feed */,
@@ -262,7 +267,6 @@
 				CD1B05681FF532A500C1420C /* Login&Register */,
 				CD1B05661FF5321300C1420C /* AppDelegate */,
 				CD1B05651FF5320400C1420C /* Main */,
-				CD1B05611FF51B9300C1420C /* Config */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -460,6 +464,32 @@
 				CD835B321FF65E0000BA0DA5 /* LYGuestViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		CD8B4D2A1FFE968A00CF235A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				CD8B4D2F1FFE997500CF235A /* Utils */,
+				CD1B05611FF51B9300C1420C /* Config */,
+				CD8B4D2B1FFE969600CF235A /* Vender */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		CD8B4D2B1FFE969600CF235A /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		CD8B4D2F1FFE997500CF235A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CD8B4D301FFE999C00CF235A /* LYUitils.swift */,
+				CD8B4D321FFE9DB400CF235A /* LYProgressHUD.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CDC57CF41FF76C3E00375426 /* Publish */ = {
@@ -726,6 +756,7 @@
 				"${BUILT_PRODUCTS_DIR}/AVOSCloud/AVOSCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -733,6 +764,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVOSCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,6 +894,8 @@
 				CDC57D0D1FF8229200375426 /* LYNavigationController.swift in Sources */,
 				CD9D9B0A1FF8BE2600376D99 /* LYCommentCell.swift in Sources */,
 				CD835B1B1FF60F5000BA0DA5 /* LYHomeViewController.swift in Sources */,
+				CD8B4D311FFE999C00CF235A /* LYUitils.swift in Sources */,
+				CD8B4D331FFE9DB400CF235A /* LYProgressHUD.swift in Sources */,
 				CDC57D0F1FF822AF00375426 /* LYTabBarController.swift in Sources */,
 				CD835B1E1FF60F9D00BA0DA5 /* LYHomeHeaderView.swift in Sources */,
 				CD13A18A1FFB73D8006911BC /* LYFeedViewController.swift in Sources */,

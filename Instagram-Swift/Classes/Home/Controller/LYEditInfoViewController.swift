@@ -106,29 +106,6 @@ class LYEditInfoViewController: UIViewController {
         mobileTextField.text = AVUser.current()?.mobilePhoneNumber
         genderTextField.text = AVUser.current()?.object(forKey: "gender") as? String
     }
-
-    // 校验Email的合法性
-    private func validateEmail(email: String) -> Bool {
-        let regex = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}"
-        let range = email.range(of: regex, options: .regularExpression)
-        let result = range != nil ? true : false
-        return result
-    }
-    
-    // 校验Web的合法性
-    private func validateWeb(web: String) -> Bool {
-        let regex = "www\\.[A-Za-z0-9._%+-]+\\.[A-Za-z]{2,14}"
-        let range = web.range(of: regex, options: .regularExpression)
-        let result = range != nil ? true : false
-        return result
-    }
-    // 校验手机号的合法性
-    private func validateMobilePhoneNumber(mobilePhoneNumber: String) -> Bool {
-        let regex = "0?(13|14|15|18)[0-9]{9}"
-        let range = mobilePhoneNumber.range(of: regex, options: .regularExpression)
-        let result = range != nil ? true : false
-        return result
-    }
     
     // 消息警告
     func alert(error: String, message: String) {
@@ -140,17 +117,17 @@ class LYEditInfoViewController: UIViewController {
     
     // MARK: - Event/Touch
     @IBAction func saveButtonDidClick(_ sender: UIBarButtonItem) {
-        if !validateWeb(web: webTextField.text!) {
+        if !LYUitils.validateWeb(web: webTextField.text!) {
             alert(error: "错误的网页链接", message: "请输入正确的网址")
             return
         }
         
-        if !validateEmail(email: emailTextField.text!) {
+        if !LYUitils.validateEmail(email: emailTextField.text!) {
             alert(error: "错误的Email地址", message: "请输入正确的电子邮件地址")
             return
         }
         
-        if !validateMobilePhoneNumber(mobilePhoneNumber: mobileTextField.text!) {
+        if !LYUitils.validateMobilePhoneNumber(mobilePhoneNumber: mobileTextField.text!) {
             alert(error: "错误的手机号码", message: "请输入正确的手机号码")
             return
         }
@@ -171,8 +148,10 @@ class LYEditInfoViewController: UIViewController {
         let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
         user?["avatar"] = avatarFile
         
+        LYProgressHUD.show("正在保存...")
         user?.saveInBackground({ (isSuccess: Bool, error: Error?) in
             if isSuccess {
+                LYProgressHUD.showSuccess("信息修改成功！")
                 // 隐藏键盘
                 self.view.endEditing(true)
                 
@@ -181,6 +160,7 @@ class LYEditInfoViewController: UIViewController {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
             } else {
+                LYProgressHUD.showError("信息修改失败！")
                 print(error?.localizedDescription ?? "修改用户信息失败")
             }
         })
