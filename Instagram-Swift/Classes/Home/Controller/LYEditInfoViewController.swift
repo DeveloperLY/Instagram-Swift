@@ -11,8 +11,6 @@ import AVOSCloud
 
 class LYEditInfoViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var fullnameTextField: UITextField!
@@ -43,8 +41,6 @@ class LYEditInfoViewController: UIViewController {
         // 加载信息
         information()
         
-        setUpNotification()
-        
         // 创建pickerView
         genderPicker = UIPickerView()
         genderPicker.dataSource = self
@@ -61,9 +57,6 @@ class LYEditInfoViewController: UIViewController {
     // 界面布局
     private func alignment() -> Void {
         let width = self.view.frame.width
-        let height = self.view.frame.height
-        
-        scrollView.frame = CGRect(x: 0, y: 0, width: width, height: height)
         
         avatarImageView.frame = CGRect(x: width - 68.0 - 10.0, y: 15.0, width: 68.0, height: 68.0)
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
@@ -112,13 +105,6 @@ class LYEditInfoViewController: UIViewController {
         emailTextField.text = AVUser.current()?.email
         mobileTextField.text = AVUser.current()?.mobilePhoneNumber
         genderTextField.text = AVUser.current()?.object(forKey: "gender") as? String
-    }
-    
-    private func setUpNotification() -> Void {
-        // 监听键盘弹出和消失
-        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
     // 校验Email的合法性
@@ -205,34 +191,12 @@ class LYEditInfoViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    @objc func showKeyboard(_ notification: Notification) -> Void {
-        // 获取keyboard大小
-        let rect = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        keyboardRect = rect.cgRectValue
-        
-        // 修改滚动视图高度
-        UIView.animate(withDuration: 0.4) {
-            self.scrollView.contentSize.height = self.view.frame.height + self.keyboardRect.height / 2
-        }
-    }
-    
-    @objc func hideKeyboard(_ notification: Notification) -> Void {
-        UIView.animate(withDuration: 0.4) {
-            self.scrollView.contentSize.height = 0
-        }
-    }
-    
     @objc func avatarImageTap(_ recognizer: UITapGestureRecognizer) -> Void {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
 }
@@ -269,5 +233,23 @@ extension LYEditInfoViewController: UIImagePickerControllerDelegate, UINavigatio
     // 用户取消选择图片
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension LYEditInfoViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if fullnameTextField.isFirstResponder {
+            usernameTextField.becomeFirstResponder()
+        } else if usernameTextField.isFirstResponder {
+            webTextField.becomeFirstResponder()
+        } else if webTextField.isFirstResponder {
+            bioTextView.becomeFirstResponder()
+        } else if bioTextView.isFirstResponder {
+            emailTextField.becomeFirstResponder()
+        } else if emailTextField.isFirstResponder {
+            mobileTextField.becomeFirstResponder()
+        }
+        return true
     }
 }

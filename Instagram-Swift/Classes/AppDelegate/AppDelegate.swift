@@ -8,6 +8,7 @@
 
 import UIKit
 import AVOSCloud
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 跟踪统计
         AVAnalytics.trackAppOpened(launchOptions: launchOptions)
+        
+        // IQKeyboardManagerSwift
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().toolbarManageBehaviour = .byPosition
         
         login()
         

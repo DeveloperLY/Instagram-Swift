@@ -15,7 +15,7 @@ class LYLoginViewController: UIViewController {
     
     
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTestField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -23,17 +23,13 @@ class LYLoginViewController: UIViewController {
         
         // nameLabel 字体
         nameLabel.font = UIFont(name: "Pacifico", size: 25.0)
-
-        // 添加手势
-        let hideTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardTap(_:)))
-        self.view.addGestureRecognizer(hideTap)
     }
     
     // MARK: - Event/Touch
     @IBAction func loginButtonDidClick(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        if usernameTextField.text!.isEmpty || passwordTestField.text!.isEmpty {
+        if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             // 弹出对话框提示用户
             let alert = UIAlertController(title: "请注意", message: "用户名和密码不能为空", preferredStyle: .alert)
             let ok = UIAlertAction(title: "好的", style: .cancel, handler: nil)
@@ -44,7 +40,7 @@ class LYLoginViewController: UIViewController {
         }
         
         // 用户登录
-        AVUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTestField.text!) { (user, error) in
+        AVUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error == nil {
                 // 登录成功
                 UserDefaults.standard.set(user!.username, forKey: "username")
@@ -59,8 +55,16 @@ class LYLoginViewController: UIViewController {
         
     }
     
-    @objc func hideKeyboardTap(_ recognizer: UITapGestureRecognizer) -> Void {
-        self.view.endEditing(true)
+}
+
+// MARK: - UITextFieldDelegate
+extension LYLoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if usernameTextField.isFirstResponder {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
     }
-    
 }

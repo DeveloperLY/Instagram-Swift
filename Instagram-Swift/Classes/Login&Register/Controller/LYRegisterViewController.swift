@@ -25,18 +25,12 @@ class LYRegisterViewController: UIViewController {
     @IBOutlet weak var bioTextField: UITextField!
     @IBOutlet weak var webTextField: UITextField!
     
-    // 滚动视图
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     // 注册、取消按钮关联
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
     // 设置滚动视图的高度
     var scrollViewHeight: CGFloat = 0.0
-    
-    
-    @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
     
     
     // 获取虚拟键盘的大小
@@ -46,37 +40,17 @@ class LYRegisterViewController: UIViewController {
         super.viewDidLoad()
 
         setUpUI()
-        
-        setUpNotification()
-        
-        // 添加手势
-        let hideTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardTap(_:)))
-        self.view.addGestureRecognizer(hideTap)
     }
     
     // MARK: - Private Methods
     private func setUpUI() -> Void {
-        // 设置 contentSize
-        scrollView.contentSize.height = self.view.frame.height
-        scrollViewHeight = self.view.frame.height
-        
         let avatarImageTap = UITapGestureRecognizer(target: self, action: #selector(avatarImageTap(_:)))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(avatarImageTap)
         // 设置头像为圆形
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width * 0.5
         avatarImageView.clipsToBounds = true
-        
-        
     }
-    
-    private func setUpNotification() -> Void {
-        // 监听键盘弹出和消失
-        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
     
     private func selectImage() -> Void {
         let imagePickerController = UIImagePickerController()
@@ -155,28 +129,6 @@ class LYRegisterViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func showKeyboard(_ notification: Notification) -> Void {
-        // 获取keyboard大小
-        let rect = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        keyboardRect = rect.cgRectValue
-        
-        // 修改滚动视图高度
-        UIView.animate(withDuration: 0.4) {
-            self.scrollBottomConstraint.constant -= self.keyboardRect.size.height
-            self.scrollView.contentSize.height = self.view.frame.height
-        }
-    }
-    
-    @objc func hideKeyboard(_ notification: Notification) -> Void {
-        UIView.animate(withDuration: 0.4) {
-            self.scrollBottomConstraint.constant = 0
-        }
-    }
-    
-    @objc func hideKeyboardTap(_ recognizer: UITapGestureRecognizer) -> Void {
-        self.view.endEditing(true)
-    }
-    
     @objc func avatarImageTap(_ recognizer: UITapGestureRecognizer) -> Void {
         selectImage()
     }
@@ -196,5 +148,27 @@ extension LYRegisterViewController: UIImagePickerControllerDelegate, UINavigatio
     // 用户取消选择图片
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension LYRegisterViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if usernameTextField.isFirstResponder {
+            passwordTextField.becomeFirstResponder()
+        } else if passwordTextField.isFirstResponder {
+            repeatPasswordTextField.becomeFirstResponder()
+        } else if repeatPasswordTextField.isFirstResponder {
+            emailTextField.becomeFirstResponder()
+        } else if emailTextField.isFirstResponder {
+            fullnameTextField.becomeFirstResponder()
+        } else if fullnameTextField.isFirstResponder {
+            bioTextField.becomeFirstResponder()
+        } else if bioTextField.isFirstResponder {
+            webTextField.becomeFirstResponder()
+        } else {
+            webTextField.resignFirstResponder()
+        }
+        return true
     }
 }
