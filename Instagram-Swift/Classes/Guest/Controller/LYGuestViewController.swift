@@ -181,7 +181,7 @@ class LYGuestViewController: UICollectionViewController {
                     headerView.bioLabel.text = (object as AnyObject).object(forKey: "bio") as? String
                     headerView.webTextView.text = (object as AnyObject).object(forKey: "web") as? String
                     
-                    let avatarQuery = AVUser.current()?.object(forKey: "avatar") as! AVFile
+                    let avatarQuery = (object as AnyObject).object(forKey: "avatar") as! AVFile
                     avatarQuery.getDataInBackground { (data: Data?, error: Error?) in
                         if data == nil {
                             print(error?.localizedDescription ?? "头像信息获取失败")
