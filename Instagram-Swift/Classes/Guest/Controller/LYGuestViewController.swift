@@ -38,6 +38,9 @@ class LYGuestViewController: UICollectionViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(back(_:)))
         self.navigationItem.leftBarButtonItem = backButton
         
+        // 移除右边按钮
+        self.navigationItem.rightBarButtonItem = nil
+        
         // 实现右滑返回
         let backSeipe = UISwipeGestureRecognizer(target: self, action: #selector(back(_:)))
         backSeipe.direction = .right

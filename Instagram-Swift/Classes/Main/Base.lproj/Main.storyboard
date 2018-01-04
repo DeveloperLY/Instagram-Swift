@@ -891,11 +891,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="5g3-oY-XEb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="7JB-Le-bIM">
-                            <connections>
-                                <action selector="logout:" destination="SKM-kz-vkr" id="NeF-bk-ggd"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="7JB-Le-bIM"/>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVJ-nB-aST" userLabel="First Responder" sceneMemberID="firstResponder"/>
