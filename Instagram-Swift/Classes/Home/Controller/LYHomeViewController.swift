@@ -41,6 +41,9 @@ class LYHomeViewController: UICollectionViewController {
         
         // 监听数据刷新
         NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        
+        // 监听数据刷新
+        NotificationCenter.default.addObserver(self, selector: #selector(uploaded(_:)), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
     }
     
     // MARK: - Private Methods
@@ -105,6 +108,10 @@ class LYHomeViewController: UICollectionViewController {
     
     @objc func reload(_ notification: Notification) -> Void {
         collectionView?.reloadData()
+    }
+    
+    @objc func uploaded(_ notification: Notification) -> Void {
+        loadPosts()
     }
     
     // MARK: - Event
