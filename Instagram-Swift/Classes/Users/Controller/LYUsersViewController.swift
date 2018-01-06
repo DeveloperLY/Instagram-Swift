@@ -44,6 +44,9 @@ class LYUsersViewController: UITableViewController {
         
         // 启动集合视图
         collectionViewLaunch()
+        
+        // 监听数据刷新
+        NotificationCenter.default.addObserver(self, selector: #selector(uploaded(_:)), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
     }
     
     func loadUsers() {
@@ -118,6 +121,11 @@ class LYUsersViewController: UITableViewController {
                 }
             })
         }
+    }
+    
+    // 在接收到uploaded通知后重新载入posts
+    @objc func uploaded(_ notification: Notification) -> Void {
+        loadPosts()
     }
     
     func collectionViewLaunch() {
