@@ -13,6 +13,7 @@ class LYProgressHUD: NSObject {
     class func enable() -> Void {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setMinimumDismissTimeInterval(3.0)
+        SVProgressHUD.setOffsetFromCenter(UIOffset(horizontal: 0, vertical: LYNavigatorHeight))
     }
     
     class func show() -> Void {
