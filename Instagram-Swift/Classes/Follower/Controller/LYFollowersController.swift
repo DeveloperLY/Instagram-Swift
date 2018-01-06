@@ -37,6 +37,8 @@ class LYFollowersController: UITableViewController {
         let backSeipe = UISwipeGestureRecognizer(target: self, action: #selector(back(_:)))
         backSeipe.direction = .right
         self.view.addGestureRecognizer(backSeipe)
+        
+        tableView.tableFooterView = UIView()
     }
     
     @objc func back(_: UIBarButtonItem) -> Void {
