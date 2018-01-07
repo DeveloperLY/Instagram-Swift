@@ -48,7 +48,8 @@ class LYHomeViewController: UICollectionViewController {
     
     // MARK: - Private Methods
     @objc func refresh() -> Void {
-        collectionView?.reloadData()
+        // 加载数据
+        loadPosts()
         
         // 停止刷新动画
         refresher.endRefreshing()
