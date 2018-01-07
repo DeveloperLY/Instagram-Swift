@@ -177,7 +177,7 @@ class LYFeedViewController: UITableViewController {
     }
     
     @objc func refresh(_ notification: Notification) -> Void {
-        loadPosts()
+        tableView.reloadData()
     }
     
 
