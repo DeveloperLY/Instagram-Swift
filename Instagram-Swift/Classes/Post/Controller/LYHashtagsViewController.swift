@@ -166,9 +166,9 @@ class LYHashtagsViewController: UICollectionViewController {
         
         // Configure the cell
         // 从pictureArray 中获取图片
-        pictureArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.pictureImageView.image = UIImage(data: data!)
+        pictureArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                cell.pictureImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "获取图片失败")
             }

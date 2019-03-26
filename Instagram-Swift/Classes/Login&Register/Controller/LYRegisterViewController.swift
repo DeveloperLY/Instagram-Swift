@@ -107,8 +107,8 @@ class LYRegisterViewController: UIViewController {
         user["gender"] = ""
         
         // 转换头像数据并发送到服务器
-        let avatarData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
-        let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
+        let avatarData = avatarImageView.image!.jpegData(compressionQuality: 0.5)
+        let avatarFile = AVFile(data: avatarData!, name: "avatar.jpg")
         user["avatar"] = avatarFile
         
         LYProgressHUD.show("正在注册...")
@@ -152,8 +152,11 @@ class LYRegisterViewController: UIViewController {
 extension LYRegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // 用户选择了图片
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        avatarImageView.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -183,4 +186,14 @@ extension LYRegisterViewController: UITextFieldDelegate {
         }
         return true
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

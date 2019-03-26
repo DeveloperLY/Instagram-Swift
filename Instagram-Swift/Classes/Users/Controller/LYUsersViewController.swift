@@ -172,9 +172,9 @@ class LYUsersViewController: UITableViewController {
         cell.followButton.isHidden = true
         
         cell.usernameLabel.text = usernameArray[indexPath.row]
-        avatarArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.avatarImageView.image = UIImage(data: data!)
+        avatarArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                cell.avatarImageView.image = UIImage(contentsOfFile: url!.path)
             }
         }
         
@@ -188,6 +188,7 @@ class LYUsersViewController: UITableViewController {
         
         if cell.usernameLabel.text == AVUser.current()?.username {
             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+            homeViewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(homeViewController, animated: true)
         } else {
             let query = AVUser.query()
@@ -197,6 +198,7 @@ class LYUsersViewController: UITableViewController {
                     guestArray.append(object as! AVUser)
                     
                     let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                    guestViewController.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(guestViewController, animated: true)
                 }
             })
@@ -289,9 +291,9 @@ extension LYUsersViewController: UICollectionViewDataSource, UICollectionViewDel
         let pictureImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
         cell.addSubview(pictureImageView)
         
-        pictureArray[indexPath.item].getDataInBackground { (data: Data?, error: Error?) in
-            if (error == nil) {
-                pictureImageView.image = UIImage(data: data!)
+        pictureArray[indexPath.item].download { (url: URL?, error: Error?) in
+            if (error == nil) && (url != nil) {
+                pictureImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "加载图片失败")
             }
@@ -313,6 +315,7 @@ extension LYUsersViewController: UICollectionViewDataSource, UICollectionViewDel
         postuuid.append(puuidArray[indexPath.row])
         
         let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as! LYPostViewController
+        postViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
 }

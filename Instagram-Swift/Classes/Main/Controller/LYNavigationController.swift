@@ -14,7 +14,7 @@ class LYNavigationController: UINavigationController {
         super.viewDidLoad()
 
         // 导航栏中Title的颜色设置
-        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         // 导航栏中按钮的颜色
         self.navigationBar.tintColor = .white
         // 导航栏的背景色

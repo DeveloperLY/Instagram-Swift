@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // LeanCloud
         AVOSCloud.setApplicationId(kLeanCloudAppID, clientKey: kLeanCloudAppKey)
         
@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVAnalytics.trackAppOpened(launchOptions: launchOptions)
         
         // IQKeyboardManagerSwift
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        IQKeyboardManager.sharedManager().toolbarManageBehaviour = .byPosition
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
         
         // HUD
         LYProgressHUD.enable()

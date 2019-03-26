@@ -129,6 +129,7 @@ class LYHomeViewController: UICollectionViewController {
         let followersViewController = self.storyboard?.instantiateViewController(withIdentifier: "FollowersController") as! LYFollowersController
         followersViewController.user = (AVUser.current()?.username)!
         followersViewController.show = "关 注 者"
+        followersViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(followersViewController, animated: true)
     }
     
@@ -137,6 +138,7 @@ class LYHomeViewController: UICollectionViewController {
         let followersViewController = self.storyboard?.instantiateViewController(withIdentifier: "FollowersController") as! LYFollowersController
         followersViewController.user = (AVUser.current()?.username)!
         followersViewController.show = "关 注"
+        followersViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(followersViewController, animated: true)
     }
     
@@ -170,7 +172,7 @@ class LYHomeViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = self.collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeHeaderView", for: indexPath) as! LYHomeHeaderView
+        let headerView = self.collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeaderView", for: indexPath) as! LYHomeHeaderView
         
         // 获取信息显示
         headerView.fullnameLabel.text = AVUser.current()?.object(forKey: "fullname") as? String
@@ -178,9 +180,9 @@ class LYHomeViewController: UICollectionViewController {
         headerView.bioLabel.text = AVUser.current()?.object(forKey: "bio") as? String
         
         let avatarQuery = AVUser.current()?.object(forKey: "avatar") as! AVFile
-        avatarQuery.getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                headerView.avatarImageView.image = UIImage(data: data!)
+        avatarQuery.download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                headerView.avatarImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "头像信息获取失败")
             }
@@ -229,9 +231,9 @@ class LYHomeViewController: UICollectionViewController {
     
         // Configure the cell
         // 从pictureArray 中获取图片
-        pictureArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.pictureImageView.image = UIImage(data: data!)
+        pictureArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if (error == nil) && (url != nil) {
+                cell.pictureImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "获取图片失败")
             }
@@ -258,6 +260,7 @@ extension LYHomeViewController: UICollectionViewDelegateFlowLayout {
         postuuid.append(puuidArray[indexPath.row])
         
         let postViewController = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as! LYPostViewController
+        postViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
 }

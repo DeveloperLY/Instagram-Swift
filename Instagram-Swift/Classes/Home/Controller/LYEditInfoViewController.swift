@@ -89,11 +89,11 @@ class LYEditInfoViewController: UIViewController {
     // 获取用户信息
     private func information() -> Void {
         let avatar = AVUser.current()?.object(forKey: "avatar") as! AVFile
-        avatar.getDataInBackground { (data: Data?, error: Error?) in
-            if data == nil {
-                print(error?.localizedDescription ?? "头像信息获取失败")
+        avatar.download { (url: URL?, error: Error?) in
+            if (error == nil) && (url != nil) {
+                self.avatarImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
-                self.avatarImageView.image = UIImage(data: data!)
+                print(error?.localizedDescription ?? "头像信息获取失败")
             }
         }
         
@@ -144,8 +144,8 @@ class LYEditInfoViewController: UIViewController {
         
         user?["gender"] = (genderTextField.text?.isEmpty)! ? "" : genderTextField.text!
         
-        let avatarData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
-        let avatarFile = AVFile(name: "avatar.jpg", data: avatarData!)
+        let avatarData = avatarImageView.image!.jpegData(compressionQuality: 0.5)
+        let avatarFile = AVFile(data: avatarData!, name: "avatar.jpg") 
         user?["avatar"] = avatarFile
         
         LYProgressHUD.show("正在保存...")
@@ -205,8 +205,11 @@ extension LYEditInfoViewController: UIPickerViewDataSource, UIPickerViewDelegate
 extension LYEditInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // 用户选择了图片
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        avatarImageView.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -232,4 +235,14 @@ extension LYEditInfoViewController: UITextFieldDelegate {
         }
         return true
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

@@ -85,9 +85,9 @@ class LYFollowersController: UITableViewController {
         
         cell.usernameLabel.text = followerArray[indexPath.row].username
         let avatar = followerArray[indexPath.row].object(forKey: "avatar") as! AVFile
-        avatar.getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.avatarImageView.image = UIImage(data: data!)
+        avatar.download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                cell.avatarImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "获取图片失败")
             }

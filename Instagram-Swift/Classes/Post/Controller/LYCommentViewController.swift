@@ -61,8 +61,8 @@ class LYCommentViewController: UIViewController {
         self.sendButton.isEnabled = false
         
         // 如果键盘出现或消失，捕获这两个消息
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         alignment()
         
@@ -72,7 +72,7 @@ class LYCommentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = false
         
         // 隐藏底部TabBar
         self.tabBarController?.tabBar.isHidden = true
@@ -84,7 +84,7 @@ class LYCommentViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         // 显示底部TabBar
         self.tabBarController?.tabBar.isHidden = false
@@ -111,7 +111,7 @@ class LYCommentViewController: UIViewController {
         commentY = commentTextView.frame.origin.y
         
         tableView.estimatedRowHeight = LYScreenW / 5.33
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func loadComments() {
@@ -203,7 +203,7 @@ class LYCommentViewController: UIViewController {
     // 当键盘出现的时候会调用该方法
     @objc func keyboardWillShow(_ notification: Notification) {
         // 获取到键盘的大小
-        let rect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!) as! NSValue
+        let rect = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey]!) as! NSValue
         keyboard = rect.cgRectValue
         
         UIView.animate(withDuration: 0.4, animations: {() -> Void in
@@ -409,9 +409,9 @@ extension LYCommentViewController: UITableViewDataSource, UITableViewDelegate {
         cell.usernameButton.setTitle(usernameArray[indexPath.row], for: .normal)
         cell.usernameButton.sizeToFit()
         cell.commentLabel.text = commentArray[indexPath.row]
-        avatarArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.avatarImageView.image = UIImage(data: data!)
+        avatarArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if error == nil && url != nil {
+                cell.avatarImageView.image = UIImage(contentsOfFile: url!.path) 
             }
         }
         

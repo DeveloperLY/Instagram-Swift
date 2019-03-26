@@ -23,7 +23,7 @@ class LYNewsViewController: UITableViewController {
         super.viewDidLoad()
         
         // 动态调整表格的高度
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 60
         
         // 导航栏的title
@@ -74,6 +74,7 @@ class LYNewsViewController: UITableViewController {
         
         if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+            homeViewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(homeViewController, animated: true)
         } else {
             let query = AVUser.query()
@@ -83,6 +84,7 @@ class LYNewsViewController: UITableViewController {
                     guestArray.append(object as! AVUser)
                     
                     let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                    guestViewController.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(guestViewController, animated: true)
                 }
             })
@@ -101,9 +103,9 @@ class LYNewsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! LYNewsCell
         
         cell.usernameButton.setTitle(usernameArray[indexPath.row], for: .normal)
-        avatarArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.avatarImageView.image = UIImage(data: data!)
+        avatarArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                cell.avatarImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "加载通知用户头像失败")
             }

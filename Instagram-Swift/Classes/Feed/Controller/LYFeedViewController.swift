@@ -35,7 +35,7 @@ class LYFeedViewController: UITableViewController {
         self.navigationItem.title = "聚合"
         
         // Cell 高度自动适应
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 550.0
         
         // 设置refresher
@@ -191,6 +191,7 @@ class LYFeedViewController: UITableViewController {
         
         if cell.usernameButton.titleLabel?.text == AVUser.current()?.username {
             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! LYHomeViewController
+            homeViewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(homeViewController, animated: true)
         } else {
             let query = AVUser.query()
@@ -200,6 +201,7 @@ class LYFeedViewController: UITableViewController {
                     guestArray.append(object as! AVUser)
                     
                     let guestViewController = self.storyboard?.instantiateViewController(withIdentifier: "GuestViewController") as! LYGuestViewController
+                    guestViewController.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(guestViewController, animated: true)
                 }
             })
@@ -348,13 +350,17 @@ class LYFeedViewController: UITableViewController {
         cell.titleLabel.sizeToFit()
         
         // 配置用户头像
-        avatarArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            cell.avatarImageView.image = UIImage(data: data!)
+        avatarArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if url != nil {
+                cell.avatarImageView.image = UIImage(contentsOfFile: url!.path)
+            }
         }
         
         // 配置帖子照片
-        pictureArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            cell.pictureImageView.image = UIImage(data: data!)
+        pictureArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if url != nil {
+                cell.pictureImageView.image = UIImage(contentsOfFile: url!.path)
+            }
         }
         
         // 帖子的发布时间和当前时间的间隔差

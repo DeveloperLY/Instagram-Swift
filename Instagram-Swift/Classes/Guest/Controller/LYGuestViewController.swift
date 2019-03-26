@@ -158,7 +158,7 @@ class LYGuestViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = self.collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeHeaderView", for: indexPath) as! LYHomeHeaderView
+        let headerView = self.collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeaderView", for: indexPath) as! LYHomeHeaderView
         
         // 访客的信息
         let infoQuery = AVQuery(className: "_User")
@@ -185,11 +185,10 @@ class LYGuestViewController: UICollectionViewController {
                     headerView.webTextView.text = (object as AnyObject).object(forKey: "web") as? String
                     
                     let avatarQuery = (object as AnyObject).object(forKey: "avatar") as! AVFile
-                    avatarQuery.getDataInBackground { (data: Data?, error: Error?) in
-                        if data == nil {
+                    avatarQuery.download { (url: URL?, error: Error?) in
+                        if url == nil {
                             print(error?.localizedDescription ?? "头像信息获取失败")
-                        } else {
-                            headerView.avatarImageView.image = UIImage(data: data!)
+                        } else {  headerView.avatarImageView.image = UIImage(contentsOfFile: url!.path)
                         }
                     }
                 }
@@ -265,9 +264,9 @@ class LYGuestViewController: UICollectionViewController {
     
         // Configure the cell
         
-        pictureArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
-            if error == nil {
-                cell.pictureImageView.image = UIImage(data: data!)
+        pictureArray[indexPath.row].download { (url: URL?, error: Error?) in
+            if error == nil && (url != nil) {
+                cell.pictureImageView.image = UIImage(contentsOfFile: url!.path)
             } else {
                 print(error?.localizedDescription ?? "获取图片失败")
             }
