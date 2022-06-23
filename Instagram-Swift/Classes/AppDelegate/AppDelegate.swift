@@ -18,10 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // LeanCloud
-        AVOSCloud.setApplicationId(kLeanCloudAppID, clientKey: kLeanCloudAppKey)
-        
-        // 跟踪统计
-        AVAnalytics.trackAppOpened(launchOptions: launchOptions)
+        AVOSCloud.setApplicationId(kLeanCloudAppID, clientKey: kLeanCloudAppKey, serverURLString: kLeanCloudServerURL)
         
         // IQKeyboardManagerSwift
         IQKeyboardManager.shared.enable = true

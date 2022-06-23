@@ -6,11 +6,11 @@ target 'Instagram-Swift' do
   use_frameworks!
 
   # Pods for Instagram-Swift
-  pod 'AVOSCloud', '~> 11.6.5'              # 数据存储、短信、云引擎调用等基础服务模块
-  pod 'SVProgressHUD', '~> 2.2.5'
-  pod 'SnapKit', '~> 5.0.1'
-  pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :tag => '1.1.0' 
-  pod 'IQKeyboardManagerSwift', '~> 6.4.1'
+  pod 'AVOSCloud', '= 12.3.3'              # 数据存储、短信、云引擎调用等基础服务模块
+  pod 'SVProgressHUD', '= 2.2.5'
+  pod 'SnapKit', '= 5.6.0'
+  pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :tag => '1.1.5'
+  pod 'IQKeyboardManagerSwift', '= 6.5.10'
 
   target 'Instagram-SwiftTests' do
     inherit! :search_paths
