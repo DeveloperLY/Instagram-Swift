@@ -26,6 +26,14 @@ class LYTabBarController: UITabBarController {
         self.tabBar.barTintColor = UIColor(red: 37.0 / 255.0, green: 39.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
         
         self.tabBar.isTranslucent = false
+
+        if #available(iOS 15.0, *) {
+            let appearnce = UITabBarAppearance()
+            appearnce.configureWithOpaqueBackground()
+            appearnce.backgroundColor = UIColor(red: 37.0 / 255.0, green: 39.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
+            self.tabBar.standardAppearance = appearnce
+            self.tabBar.scrollEdgeAppearance = appearnce
+        }
         
         // 自定义标签按钮
         let itemWidth = self.view.frame.width / 5

@@ -21,6 +21,15 @@ class LYNavigationController: UINavigationController {
         self.navigationBar.barTintColor = UIColor(red: 18.0 / 255.0, green: 86.0 / 255.0, blue: 136.0 / 255.0, alpha: 1.0)
         // 不允许透明
         self.navigationBar.isTranslucent = false
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(red: 18.0 / 255.0, green: 86.0 / 255.0, blue: 136.0 / 255.0, alpha: 1.0)
+            navigationBar.standardAppearance = appearance;
+            navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
